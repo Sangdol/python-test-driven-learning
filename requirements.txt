@@ -1,0 +1,3 @@
+# For continuous test: ptw
+# https://github.com/joeyespo/pytest-watch
+pytest-watch
