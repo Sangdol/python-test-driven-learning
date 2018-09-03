@@ -9,6 +9,7 @@ pandas = "*"
 numpy = "*"
 
 [dev-packages]
+ptpython = "*"
 
 [requires]
 python_version = "3.7"
