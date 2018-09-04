@@ -36,6 +36,28 @@ class PandaTest(unittest.TestCase):
         self.assertTrue(np.isnan(s[1]))
         self.assertEqual(s.index[1], 'three')
 
+    def test_querying_series(self):
+        numbers = {'one': 1, 'two': 2}
+        s = pd.Series(numbers)
+
+        self.assertEqual(s.iloc[1], 2)
+        self.assertEqual(s.loc['one'], 1)
+
+        # not recommended as labels can be number
+        self.assertEqual(s[1], 2)
+        self.assertEqual(s['one'], 1)
+
+        # vectorized calculation is much faster
+        self.assertEqual(np.sum(s), 3)
+
+        s += 2
+        self.assertEqual(np.sum(s), 7)
+
+        # append doesn't change the original object
+        new_s = s.append(pd.Series({'three': 3}))
+        self.assertEqual(len(s), 2)
+        self.assertEqual(len(new_s), 3)
+
     def test_read_csv_and_data_frame(self):
         df = pd.read_csv('stub/test_panda.csv')
         self.assertEqual(df.size, 4);
