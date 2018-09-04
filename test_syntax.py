@@ -1,5 +1,6 @@
 import unittest
 
+
 class SyntaxTest(unittest.TestCase):
 
     def test_if_statement(self):
@@ -10,6 +11,7 @@ class SyntaxTest(unittest.TestCase):
             self.fail()
         else:
             self.fail()
+
 
 if __name__ == '__main__':
     unittest.main()

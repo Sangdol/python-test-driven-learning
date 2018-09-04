@@ -2,6 +2,7 @@ import unittest
 
 import pandas as pd
 
+
 class PandaTest(unittest.TestCase):
 
     def test_read_csv_and_data_frame(self):
@@ -23,6 +24,6 @@ class PandaTest(unittest.TestCase):
         self.assertEqual(merged.at[1, 'age'], 35)
         self.assertEqual(merged.at[1, 'gender'], 'female')
 
+
 if __name__ == '__main__':
     unittest.main()
-

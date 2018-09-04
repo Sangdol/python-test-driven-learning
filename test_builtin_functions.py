@@ -1,5 +1,6 @@
 import unittest
 
+
 class BuiltinFunctionsTest(unittest.TestCase):
 
     def test_map(self):
@@ -9,6 +10,7 @@ class BuiltinFunctionsTest(unittest.TestCase):
             return name.split(' ')[1]
 
         self.assertEqual(list(map(lastname, names)), ['lee', 'kim'])
+
 
 if __name__ == '__main__':
     unittest.main()

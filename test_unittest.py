@@ -2,6 +2,7 @@
 
 import unittest
 
+
 class UnitTestTest(unittest.TestCase):
 
     def test_assert(self):
@@ -12,6 +13,7 @@ class UnitTestTest(unittest.TestCase):
     @unittest.skip("skip this")
     def test_nothing(self):
         self.fail("shouldn't happen")
+
 
 if __name__ == '__main__':
     unittest.main()

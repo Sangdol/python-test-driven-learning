@@ -1,5 +1,6 @@
 import unittest
 
+
 class SequenceTest(unittest.TestCase):
 
     def test_tuple(self):
@@ -57,6 +58,7 @@ class SequenceTest(unittest.TestCase):
             key_value += (key + value)
 
         self.assertEqual(key_value, 'helloworldhallowelt')
+
 
 if __name__ == '__main__':
     unittest.main()
