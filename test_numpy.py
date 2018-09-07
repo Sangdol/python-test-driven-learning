@@ -8,6 +8,16 @@ class NumpyTest(unittest.TestCase):
     def assertArrayEqual(self, arr1, arr2):
         self.assertTrue(np.array_equal(arr1, arr2))
 
+    # For conditional (ternary) operation
+    # https://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html
+    def test_where(self):
+        x = np.array([1, 2, 3])
+        self.assertArrayEqual(np.where(x >= 2, x, 0), [0, 2, 3])
+
+    def test_transpose(self):
+        self.assertArrayEqual(np.transpose([1, 2]), [1, 2])
+        self.assertArrayEqual(np.transpose([[1, 2]]), [[1], [2]])
+
     # https://docs.scipy.org/doc/numpy/reference/generated/numpy.arange.html
     def test_arange(self):
         self.assertArrayEqual(np.arange(3), [0, 1, 2])
