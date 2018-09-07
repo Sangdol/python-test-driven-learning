@@ -7,6 +7,9 @@ name = "pypi"
 pytest-watch = "*"
 pandas = "*"
 numpy = "*"
+matplotlib = "*"
+ipython = "*"
+ipykernel = "*"
 
 [dev-packages]
 ptpython = "*"
