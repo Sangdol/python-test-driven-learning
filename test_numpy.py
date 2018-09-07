@@ -1,5 +1,6 @@
 import unittest
 import numpy as np
+import collections
 
 
 class NumpyTest(unittest.TestCase):
@@ -7,6 +8,16 @@ class NumpyTest(unittest.TestCase):
     # https://docs.scipy.org/doc/numpy/reference/generated/numpy.array_equal.html
     def assertArrayEqual(self, arr1, arr2):
         self.assertTrue(np.array_equal(arr1, arr2))
+
+    # https://stackoverflow.com/questions/28663856/how-to-count-the-occurrence-of-certain-item-in-an-ndarray-in-python
+    def test_counting(self):
+        y = np.array([0, 0, 1, 1, 1])
+        self.assertEqual(np.sum(y), 3)
+        self.assertEqual(np.count_nonzero(y), 3)
+        self.assertEqual(collections.Counter(y), {0: 2, 1: 3})
+        self.assertEqual(len(y[y == 1]), 3)
+        self.assertEqual((y == 1).sum(), 3)
+        self.assertEqual(list(y).count(1), 3)
 
     # For conditional (ternary) operation
     # https://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html
