@@ -7,7 +7,8 @@ import numpy as np
 class PandaTest(unittest.TestCase):
 
     def assertArrayEqual(self, arr1, arr2):
-        self.assertTrue(np.array_equal(arr1, arr2))
+        if not np.array_equal(arr1, arr2):
+            self.fail("{} is not {}".format(arr1, arr2))
 
     def test_series(self):
         self.assertEqual(str(pd.Series([1]).dtype), 'int64')
@@ -57,6 +58,35 @@ class PandaTest(unittest.TestCase):
         new_s = s.append(pd.Series({'three': 3}))
         self.assertEqual(len(s), 2)
         self.assertEqual(len(new_s), 3)
+
+    def test_data_frame_data_structure(self):
+        item1 = pd.Series({'Name': 'note', 'Cost': 10})
+        item2 = pd.Series({'Name': 'pen', 'Cost': 5})
+        item3 = pd.Series({'Name': 'phone', 'Cost': 500})
+        df = pd.DataFrame([item1, item2, item3], index=['store1', 'store1', 'store2'])
+
+        self.assertEqual(df.loc['store2', 'Cost'], 500)
+        self.assertEqual(str(type(df.loc['store2'])),
+                         "<class 'pandas.core.series.Series'>")
+
+        self.assertEqual(len(df.loc['store1']), 2)
+        self.assertArrayEqual(df.loc['store1', 'Cost'], [10, 5])
+
+        self.assertArrayEqual(df.T.loc['Cost'], [10, 5, 500])
+        self.assertArrayEqual(df['Cost'], [10, 5, 500])
+
+        # chaining is not recommended because
+        # 1. it copies the origin so the behavior is unexpected
+        # 2. as it copies it could be slow
+        # why it could be unexpected? there can be no action between anyway.(??)
+        self.assertArrayEqual(df.loc['store1']['Cost'], [10, 5])
+
+        # drop doesn't change the origin
+        self.assertEqual(len(df.drop('store1')), 1)
+
+        copy_df = df.copy()
+        del copy_df['Cost']
+        self.assertEqual(len(copy_df.columns), 1)
 
     def test_read_csv_and_data_frame(self):
         df = pd.read_csv('stub/test_panda.csv')
