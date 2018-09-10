@@ -10,6 +10,13 @@ class PandaTest(unittest.TestCase):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
 
+    # np.newaxis is an axis for 'None' and is used to increase the dimension
+    # https://stackoverflow.com/questions/29241056/how-does-numpy-newaxis-work-and-when-to-use-it
+    def test_new_axis(self):
+        x = np.array([1, 2, 3])
+        self.assertArrayEqual(x[:, np.newaxis], [[1], [2], [3]])
+        self.assertArrayEqual(x[np.newaxis, :], [[1, 2, 3]])
+
     def test_series(self):
         self.assertEqual(str(pd.Series([1]).dtype), 'int64')
         self.assertEqual(str(pd.Series([1, None]).dtype), 'float64')
