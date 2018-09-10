@@ -72,6 +72,14 @@ class PandaTest(unittest.TestCase):
         self.assertEqual(len(s), 2)
         self.assertEqual(len(new_s), 3)
 
+    def test_data_frame_rename(self):
+        item1 = pd.Series({'Name': 'note', 'Cost': 10})
+        item2 = pd.Series({'Name': 'pen', 'Cost': 5})
+        item3 = pd.Series({'Name': 'phone', 'Cost': 500})
+        df = pd.DataFrame([item1, item2, item3], index=['store1', 'store1', 'store2'])
+        df.rename(columns={'Name': 'New Name'}, inplace=True)
+        self.assertArrayEqual(list(df), ['New Name', 'Cost'])
+
     def test_data_frame_data_structure(self):
         item1 = pd.Series({'Name': 'note', 'Cost': 10})
         item2 = pd.Series({'Name': 'pen', 'Cost': 5})
