@@ -1,4 +1,5 @@
 import unittest
+from datetime import datetime
 
 import pandas as pd
 import numpy as np
@@ -9,6 +10,11 @@ class PandaTest(unittest.TestCase):
     def assertArrayEqual(self, arr1, arr2):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
+
+    def test_to_datetime(self):
+        date_strs = ['2018/01/30', '2018/02/28']
+        dates = pd.to_datetime(date_strs, format='%Y/%m/%d')
+        self.assertEqual(dates[0], datetime(2018, 1, 30))
 
     # np.newaxis is an axis for 'None' and is used to increase the dimension
     # https://stackoverflow.com/questions/29241056/how-does-numpy-newaxis-work-and-when-to-use-it
