@@ -23,6 +23,9 @@ class PandaTest(unittest.TestCase):
         df = df.set_index(['Location', 'Name'])
         self.assertEqual(df.loc['store1', 'note']['Cost'], 10)
 
+        df = df.append(pd.Series(data={'Cost': 3.00}, name=('store2', 'eraser')))
+        self.assertEqual(len(df), 4)
+
     def test_boolean_mask(self):
         item1 = pd.Series({'Name': 'note', 'Cost': 10})
         item2 = pd.Series({'Name': 'pen', 'Cost': 5})
