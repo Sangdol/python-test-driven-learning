@@ -101,6 +101,12 @@ class PandaTest(unittest.TestCase):
         del copy_df['Cost']
         self.assertEqual(len(copy_df.columns), 1)
 
+        # Getting column headers
+        # https://stackoverflow.com/questions/19482970/get-list-from-pandas-dataframe-column-headers
+        self.assertArrayEqual(df.columns.values, ['Name', 'Cost'])
+        self.assertArrayEqual(list(df), ['Name', 'Cost'])
+
+
     def test_read_csv_and_data_frame(self):
         df = pd.read_csv('stub/test_panda.csv')
         self.assertEqual(df.size, 4);
