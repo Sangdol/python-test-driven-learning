@@ -72,6 +72,25 @@ class PandaTest(unittest.TestCase):
         self.assertEqual(len(s), 2)
         self.assertEqual(len(new_s), 3)
 
+    def test_boolean_mask(self):
+        item1 = pd.Series({'Name': 'note', 'Cost': 10})
+        item2 = pd.Series({'Name': 'pen', 'Cost': 5})
+        item3 = pd.Series({'Name': 'phone', 'Cost': 500})
+        df = pd.DataFrame([item1, item2, item3], index=['store1', 'store1', 'store2'])
+
+        # using where
+        only_cheap = df.where(df['Cost'] < 50)
+        self.assertEqual(len(only_cheap), 3)
+        self.assertTrue(np.isnan(only_cheap.loc['store2', 'Name']))
+        self.assertEqual(only_cheap['Cost'].count(), 2)  # NaN is ignored
+
+        # using direct access
+        only_cheap = df[df['Cost'] < 50]
+        self.assertEqual(len(only_cheap), 2)
+
+        only_cheap_note = df[(df['Cost'] < 50) & (df['Name'] == 'note')]
+        self.assertEqual(len(only_cheap_note), 1)
+
     def test_data_frame_rename(self):
         item1 = pd.Series({'Name': 'note', 'Cost': 10})
         item2 = pd.Series({'Name': 'pen', 'Cost': 5})
@@ -113,7 +132,6 @@ class PandaTest(unittest.TestCase):
         # https://stackoverflow.com/questions/19482970/get-list-from-pandas-dataframe-column-headers
         self.assertArrayEqual(df.columns.values, ['Name', 'Cost'])
         self.assertArrayEqual(list(df), ['Name', 'Cost'])
-
 
     def test_read_csv_and_data_frame(self):
         df = pd.read_csv('stub/test_panda.csv')
