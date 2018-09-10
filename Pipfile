@@ -10,6 +10,7 @@ numpy = "*"
 matplotlib = "*"
 ipython = "*"
 ipykernel = "*"
+scipy = "*"
 
 [dev-packages]
 ptpython = "*"
