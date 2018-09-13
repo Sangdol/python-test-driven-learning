@@ -9,6 +9,10 @@ class PandaDataFrameTest(unittest.TestCase):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
 
+    def test_idxmax(self):
+        df = pd.DataFrame({'a': [10, 11, 12]})
+        self.assertEqual(df['a'].idxmax(), 2)
+
     #
     # "In the current implementation apply calls func twice
     # on the first group to decide whether it can take a fast or slow code path.
@@ -31,7 +35,6 @@ class PandaDataFrameTest(unittest.TestCase):
             # this g is not a reference but a copied value
             # from the final result: df['a'][0] == 1
             g['a'] = g['a'] + 1
-            print('g', g['a'], i)
             return g
 
         df = df.groupby('a').apply(inc)
