@@ -11,6 +11,17 @@ class PandaTest(unittest.TestCase):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
 
+    # https://pandas.pydata.org/pandas-docs/version/0.23.4/text.html
+    def test_str(self):
+        df = pd.DataFrame({'a': [10, 11, 12], 'b': ['A', 'B', 'C']})
+
+        self.assertArrayEqual(df['b'].str.lower(), ['a', 'b', 'c'])
+        self.assertArrayEqual(df['b'].str[0], ['A', 'B', 'C'])
+        self.assertArrayEqual(df.columns.str.upper().str.replace('A', 'B'), ['B', 'B'])
+
+        self.assertEqual(df['b'].str.cat(), 'ABC')
+        self.assertEqual(df['b'].str.cat(sep=','), 'A,B,C')
+
     def test_to_datetime(self):
         date_strs = ['2018/01/30', '2018/02/28']
         dates = pd.to_datetime(date_strs, format='%Y/%m/%d')
