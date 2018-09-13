@@ -3,11 +3,41 @@ import pandas as pd
 import numpy as np
 
 
-class PandaTest(unittest.TestCase):
+class PandaDataFrameTest(unittest.TestCase):
 
     def assertArrayEqual(self, arr1, arr2):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
+
+    #
+    # "In the current implementation apply calls func twice
+    # on the first group to decide whether it can take a fast or slow code path.
+    # This can lead to unexpected behavior if func has side-effects,
+    # as they will take effect twice for the first group."
+    #
+    # https://github.com/pandas-dev/pandas/issues/7739
+    # http://pandas.pydata.org/pandas-docs/stable/groupby.html#flexible-apply
+    #
+    def test_groupby_apply_warning(self):
+        df = pd.DataFrame({'a': [0]})
+
+        i = 0
+
+        # a function with a side-effect
+        def inc(g):
+            nonlocal i
+            i += 1
+            # we can know that
+            # this g is not a reference but a copied value
+            # from the final result: df['a'][0] == 1
+            g['a'] = g['a'] + 1
+            print('g', g['a'], i)
+            return g
+
+        df = df.groupby('a').apply(inc)
+
+        self.assertEqual(df['a'][0], 1)
+        self.assertEqual(i, 2)
 
     def test_indexing(self):
         item1 = pd.Series({'Name': 'note', 'Cost': 10})
