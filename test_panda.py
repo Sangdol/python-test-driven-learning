@@ -39,18 +39,18 @@ class PandaTest(unittest.TestCase):
         self.assertArrayEqual(x[:, np.newaxis], [[1], [2], [3]])
         self.assertArrayEqual(x[np.newaxis, :], [[1, 2, 3]])
 
-    def test_series(self):
+    def test_series_dtype(self):
         self.assertEqual(str(pd.Series([1]).dtype), 'int64')
         self.assertEqual(str(pd.Series([1, None]).dtype), 'float64')
         self.assertEqual(str(pd.Series(['a', None]).dtype), 'object')
 
-        # NAN
+    def test_series_nan(self):
         nan = pd.Series([1, None])[1]
         self.assertEqual(str(nan), 'nan')
         self.assertNotEqual(nan, np.nan)
         self.assertTrue(np.isnan(nan))
 
-        # dictionary
+    def test_series_dictionary(self):
         numbers = {'one': 1, 'two': 2}
         s = pd.Series(numbers)
         self.assertArrayEqual(s.index.values, ['one', 'two'])
@@ -65,6 +65,10 @@ class PandaTest(unittest.TestCase):
         self.assertEqual(s.index[0], 'one')
         self.assertTrue(np.isnan(s[1]))
         self.assertEqual(s.index[1], 'three')
+
+    def test_series_name(self):
+        s = pd.Series([1, 2], name='numbers')
+        self.assertEqual(s.name, 'numbers')
 
     def test_querying_series(self):
         numbers = {'one': 1, 'two': 2}
