@@ -9,6 +9,15 @@ class PandaDataFrameTest(unittest.TestCase):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
 
+    def test_sum(self):
+        df = pd.DataFrame({'a': [1, 2, 3], 'b': ['A', 'B', 'C']})
+        s = df.sum()
+        
+        self.assertEqual(type(s).__name__, 'Series')
+        self.assertArrayEqual(s.index, ['a', 'b'])
+        self.assertEqual(s['a'], 6)
+        self.assertEqual(s['b'], 'ABC')
+
     def test_idxmax(self):
         df = pd.DataFrame({'a': [10, 11, 12]})
         self.assertEqual(df['a'].idxmax(), 2)
@@ -93,8 +102,7 @@ class PandaDataFrameTest(unittest.TestCase):
         df = pd.DataFrame([item1, item2, item3], index=['store1', 'store1', 'store2'])
 
         self.assertEqual(df.loc['store2', 'Cost'], 500)
-        self.assertEqual(str(type(df.loc['store2'])),
-                         "<class 'pandas.core.series.Series'>")
+        self.assertEqual(type(df.loc['store2']).__name__, "Series")
 
         self.assertEqual(len(df.loc['store1']), 2)
         self.assertArrayEqual(df.loc['store1', 'Cost'], [10, 5])
