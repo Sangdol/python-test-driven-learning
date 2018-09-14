@@ -3,6 +3,18 @@ import unittest
 
 class SyntaxTest(unittest.TestCase):
 
+    # https://stackoverflow.com/questions/8683178/chained-method-calls-indentation-style-in-python
+    def test_newline(self):
+        self.assertEqual(
+            1000, 1000
+        )
+
+        self \
+            .assertEqual(1000, 1000)
+
+        (self
+            .assertEqual(1000, 1000))
+
     # stars, asterisks
     # https://stackoverflow.com/questions/36901/what-does-double-star-asterisk-and-star-asterisk-do-for-parameters
     def test_extra_args(self):
