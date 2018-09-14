@@ -11,6 +11,11 @@ class PandaTest(unittest.TestCase):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
 
+    # https://stackoverflow.com/questions/22825349/converting-between-datetime-and-pandas-timestamp-objects
+    def test_timestamp_to_datetime(self):
+        ts = pd.Timestamp('2018-09-14 00:00:00', tz=None)
+        self.assertEqual(ts.to_pydatetime(), datetime(2018, 9, 14, 0, 0))
+
     # https://pandas.pydata.org/pandas-docs/version/0.23.4/text.html
     def test_str(self):
         df = pd.DataFrame({'a': [10, 11, 12], 'b': ['A', 'B', 'C']})
