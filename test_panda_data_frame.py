@@ -62,6 +62,8 @@ class PandaDataFrameTest(unittest.TestCase):
         self.assertArrayEqual(df.index, ['note', 'pen', 'phone'])
 
         df = df.reset_index()
+        self.assertArrayEqual(df.index, [0, 1, 2])
+
         df = df.set_index(['Location', 'Name'])
         self.assertEqual(df.loc['store1', 'note']['Cost'], 10)
 
