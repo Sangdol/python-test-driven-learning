@@ -22,6 +22,19 @@ class PandaDataFrameTest(unittest.TestCase):
         df = pd.DataFrame({'a': [10, 11, 12]})
         self.assertEqual(df['a'].idxmax(), 2)
 
+    def test_agg(self):
+        df = pd.DataFrame({'a': [1, 2, 3], 'b': ['A', 'A', 'B']})
+        sums_df = df.groupby('b').agg({'a': sum})
+        self.assertEqual(sums_df.loc['A', 'a'], 3)
+        self.assertEqual(sums_df.loc['B', 'a'], 3)
+
+    def test_groupby_apply(self):
+        df = pd.DataFrame({'a': [1, 2, 3], 'b': ['A', 'A', 'B']})
+
+        sums_s = df.groupby('b').apply(lambda df, a: sum(df[a]), 'a')
+        self.assertEqual(sums_s['A'], 3)
+        self.assertEqual(sums_s['B'], 3)
+
     #
     # "In the current implementation apply calls func twice
     # on the first group to decide whether it can take a fast or slow code path.
