@@ -9,10 +9,17 @@ class PandaDataFrameTest(unittest.TestCase):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
 
+    def test_dropna(self):
+        df = pd.DataFrame({'a': [np.nan, 11, np.nan], 'b': ['A', np.nan, 'C']})
+
+        self.assertEqual(len(df.dropna()), 0)
+        self.assertEqual(len(df.dropna(subset=['a'])), 1)
+        self.assertEqual(len(df.dropna(subset=['b'])), 2)
+
     def test_sum(self):
         df = pd.DataFrame({'a': [1, 2, 3], 'b': ['A', 'B', 'C']})
         s = df.sum()
-        
+
         self.assertEqual(type(s).__name__, 'Series')
         self.assertArrayEqual(s.index, ['a', 'b'])
         self.assertEqual(s['a'], 6)

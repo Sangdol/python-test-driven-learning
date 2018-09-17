@@ -11,12 +11,11 @@ class PandaTest(unittest.TestCase):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
 
-    def test_dropna(self):
-        df = pd.DataFrame({'a': [np.nan, 11, np.nan], 'b': ['A', np.nan, 'C']})
+    def test_series_category(self):
+        s = pd.Series(['A', 'B', 'C'], index=['A', 'B', 'C']).astype(
+            'category', categories=['C', 'B', 'A'], ordered=True)
 
-        self.assertEqual(len(df.dropna()), 0)
-        self.assertEqual(len(df.dropna(subset=['a'])), 1)
-        self.assertEqual(len(df.dropna(subset=['b'])), 2)
+        self.assertEqual(len(s[s > 'B']), 1)
 
     # https://datascience.stackexchange.com/questions/12645/how-to-count-the-number-of-missing-values-in-each-row-in-pandas-dataframe
     def test_counting_null(self):
