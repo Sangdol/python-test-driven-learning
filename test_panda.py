@@ -11,6 +11,12 @@ class PandaTest(unittest.TestCase):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
 
+    def test_cut(self):
+        s = pd.Series([0, 1, 2])
+        s_labeled = pd.cut(s, 3, labels=['S', 'M', 'L'])
+
+        self.assertArrayEqual(s_labeled , ['S', 'M', 'L'])
+
     def test_series_category(self):
         s = pd.Series(['A', 'B', 'C'], index=['A', 'B', 'C']).astype(
             'category', categories=['C', 'B', 'A'], ordered=True)
