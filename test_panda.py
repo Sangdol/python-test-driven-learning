@@ -11,11 +11,20 @@ class PandaTest(unittest.TestCase):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
 
+    def test_dropna(self):
+        df = pd.DataFrame({'a': [np.nan, 11, np.nan], 'b': ['A', np.nan, 'C']})
+
+        self.assertEqual(len(df.dropna()), 0)
+        self.assertEqual(len(df.dropna(subset=['a'])), 1)
+        self.assertEqual(len(df.dropna(subset=['b'])), 2)
+
     # https://datascience.stackexchange.com/questions/12645/how-to-count-the-number-of-missing-values-in-each-row-in-pandas-dataframe
     def test_counting_null(self):
-        s = pd.Series([0, 1, np.nan, None])
+        s = pd.Series([0, np.nan, None])
 
         self.assertEqual(s.isnull().sum(), 2)
+        self.assertEqual(s.isnull().sum(), s.isna().sum())  # isnull is an alias of isna
+        self.assertEqual(s.notna().sum(), 1)
 
     # https://stackoverflow.com/questions/22825349/converting-between-datetime-and-pandas-timestamp-objects
     def test_timestamp_to_datetime(self):
