@@ -11,6 +11,12 @@ class PandaTest(unittest.TestCase):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
 
+    # https://datascience.stackexchange.com/questions/12645/how-to-count-the-number-of-missing-values-in-each-row-in-pandas-dataframe
+    def test_counting_null(self):
+        s = pd.Series([0, 1, np.nan, None])
+
+        self.assertEqual(s.isnull().sum(), 2)
+
     # https://stackoverflow.com/questions/22825349/converting-between-datetime-and-pandas-timestamp-objects
     def test_timestamp_to_datetime(self):
         ts = pd.Timestamp('2018-09-14 00:00:00', tz=None)
