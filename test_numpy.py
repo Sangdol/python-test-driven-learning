@@ -7,7 +7,14 @@ class NumpyTest(unittest.TestCase):
 
     # https://docs.scipy.org/doc/numpy/reference/generated/numpy.array_equal.html
     def assertArrayEqual(self, arr1, arr2):
-        self.assertTrue(np.array_equal(arr1, arr2))
+        if not np.array_equal(arr1, arr2):
+            self.fail("{} is not {}".format(arr1, arr2))
+
+    def test_argwhere(self):
+        arr = np.array([0, 0, np.nan, 1, 1, 1])
+        
+        self.assertArrayEqual(np.argwhere(arr == 0), [[0], [1]])
+        self.assertArrayEqual(np.argwhere(np.isnan(arr)), [[2]])
 
     # https://stackoverflow.com/questions/28663856/how-to-count-the-occurrence-of-certain-item-in-an-ndarray-in-python
     def test_counting(self):
