@@ -22,7 +22,7 @@ class PandaDataFrameTest(unittest.TestCase):
         df = pd.DataFrame({'a': [10, 11, 12]})
         self.assertEqual(df['a'].idxmax(), 2)
 
-    def test_agg(self):
+    def test_groupby_agg(self):
         df = pd.DataFrame({'a': [1, 2, 3], 'b': ['A', 'A', 'B']})
         sums_df = df.groupby('b').agg({'a': sum})
         self.assertEqual(sums_df.loc['A', 'a'], 3)
