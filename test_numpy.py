@@ -1,5 +1,6 @@
 import unittest
 import numpy as np
+import pandas as pd
 import collections
 
 
@@ -9,6 +10,19 @@ class NumpyTest(unittest.TestCase):
     def assertArrayEqual(self, arr1, arr2):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
+
+    # https://stackoverflow.com/questions/36000993/numpy-isnan-fails-on-an-array-of-floats-from-pandas-dataframe-apply
+    def test_isnan_type_error(self):
+        arr = np.array([np.nan, 0], dtype=object)
+        try:
+            """
+            np.isnan can be applied to NumPy arrays of native dtype (such as np.float64):
+            """
+            np.isnan(arr)
+            self.fail()
+        except TypeError:
+            self.assertArrayEqual(pd.isnull(arr), [True, False])
+            pass
 
     def test_argwhere(self):
         arr = np.array([0, 0, np.nan, 1, 1, 1])
