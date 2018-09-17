@@ -11,6 +11,24 @@ class NumpyTest(unittest.TestCase):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
 
+    # https://stackoverflow.com/questions/41550746/error-using-astype-when-nan-exists-in-a-dataframe
+    def test_nan_type(self):
+        self.assertEqual(type(np.nan).__name__, 'float')
+
+        arr = np.array([np.nan, 0])
+
+        self.assertEqual(str(arr.dtype), 'float64')
+        self.assertArrayEqual(arr.astype(int), [-9223372036854775808, 0])  # ??
+
+        try:
+            """
+            cannot cast to int as nan is float
+            """
+            pd.Series(arr).astype(int)
+            self.fail()
+        except ValueError:
+            pass
+
     # https://stackoverflow.com/questions/36000993/numpy-isnan-fails-on-an-array-of-floats-from-pandas-dataframe-apply
     def test_isnan_type_error(self):
         arr = np.array([np.nan, 0], dtype=object)
