@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 
-class PandaDataFrameTest(unittest.TestCase):
+class PandasDataFrameTest(unittest.TestCase):
 
     def assertArrayEqual(self, arr1, arr2):
         if not np.array_equal(arr1, arr2):
