@@ -9,6 +9,23 @@ class PandasDataFrameTest(unittest.TestCase):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
 
+    def test_reset_index(self):
+        df = pd.DataFrame({'a': range(3)})
+
+        self.assertArrayEqual(df.index, [0, 1, 2])
+        self.assertArrayEqual(df[1:3].index, [1, 2])
+
+        drop_df = df.drop(0)
+        self.assertArrayEqual(drop_df.index, [1, 2])
+        self.assertArrayEqual(drop_df.columns, ['a'])
+
+        reset_index_df = df.drop(0).reset_index()
+        self.assertArrayEqual(reset_index_df.index, [0, 1])
+        self.assertArrayEqual(reset_index_df.columns, ['index', 'a'])
+
+        reset_index_df = df.drop(0).reset_index(drop=True)
+        self.assertArrayEqual(reset_index_df.columns, ['a'])
+
     def test_dropna(self):
         df = pd.DataFrame({'a': [np.nan, 11, np.nan], 'b': ['A', np.nan, 'C']})
 
