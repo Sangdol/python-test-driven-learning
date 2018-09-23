@@ -1,7 +1,15 @@
 import unittest
 
 
-class SyntaxTest(unittest.TestCase):
+class PythonBasicTest(unittest.TestCase):
+
+    # https://stackoverflow.com/questions/2225038/determine-the-type-of-an-object
+    def test_type_checking(self):
+        self.assertTrue(type([]) is list)
+        self.assertTrue(type({}) is dict)
+
+        # isinstance is working for type inheritance
+        self.assertTrue(isinstance({}, dict))
 
     # noinspection PyUnreachableCode
     # https://stackoverflow.com/questions/2052390/manually-raising-throwing-an-exception-in-python
