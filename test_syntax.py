@@ -3,6 +3,15 @@ import unittest
 
 class SyntaxTest(unittest.TestCase):
 
+    # noinspection PyUnreachableCode
+    # https://stackoverflow.com/questions/2052390/manually-raising-throwing-an-exception-in-python
+    def test_raise_exception(self):
+        try:
+            raise ValueError('hello', 'world', '!')
+            self.fail()
+        except ValueError as err:
+            self.assertEqual(err.args, ('hello', 'world', '!'))
+
     # https://stackoverflow.com/questions/8683178/chained-method-calls-indentation-style-in-python
     def test_newline(self):
         self.assertEqual(
