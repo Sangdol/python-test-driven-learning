@@ -46,6 +46,19 @@ class PandasDataFrameTest(unittest.TestCase):
         df = pd.DataFrame({'a': [10, 11, 12]})
         self.assertEqual(df['a'].idxmax(), 2)
 
+    def test_groupby_dict(self):
+        df = pd.DataFrame({'a': [1, 2, 3]}, index=['A', 'B', 'C'])
+        d = {'A': '1', 'B': '1', 'C': '2'}
+        
+        sums_df = df.groupby(d).agg({'a': sum})
+        self.assertArrayEqual(sums_df.index, ['1', '2'])
+        self.assertArrayEqual(sums_df['a'], [3, 3])
+
+        size_of_sums_s = df.groupby(d)['a'].agg('size')
+        self.assertArrayEqual(size_of_sums_s, [2, 1])
+        self.assertArrayEqual(size_of_sums_s.index, ['1', '2'])
+        self.assertEqual(size_of_sums_s.name, 'a')
+
     def test_groupby_agg(self):
         df = pd.DataFrame({'a': [1, 2, 3], 'b': ['A', 'A', 'B']})
         sums_df = df.groupby('b').agg({'a': sum})
