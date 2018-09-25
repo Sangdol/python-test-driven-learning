@@ -3,6 +3,11 @@ import unittest
 
 class PythonBasicTest(unittest.TestCase):
 
+    # https://stackoverflow.com/questions/1823058/how-to-print-number-with-commas-as-thousands-separators
+    def test_number_to_comma_str(self):
+        self.assertEqual("{:,}".format(1000000.1234), '1,000,000.1234')
+        self.assertEqual("{:,}".format(1000000), '1,000,000')
+
     # https://stackoverflow.com/questions/2225038/determine-the-type-of-an-object
     def test_type_checking(self):
         self.assertTrue(type([]) is list)
