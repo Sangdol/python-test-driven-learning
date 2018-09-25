@@ -49,7 +49,7 @@ class PandasDataFrameTest(unittest.TestCase):
     def test_groupby_dict(self):
         df = pd.DataFrame({'a': [1, 2, 3]}, index=['A', 'B', 'C'])
         d = {'A': '1', 'B': '1', 'C': '2'}
-        
+
         sums_df = df.groupby(d).agg({'a': sum})
         self.assertArrayEqual(sums_df.index, ['1', '2'])
         self.assertArrayEqual(sums_df['a'], [3, 3])
