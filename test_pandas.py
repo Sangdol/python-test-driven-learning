@@ -17,12 +17,6 @@ class PandasTest(unittest.TestCase):
 
         self.assertArrayEqual(s_labeled, ['S', 'M', 'L'])
 
-    def test_series_category(self):
-        s = pd.Series(['A', 'B', 'C'], index=['A', 'B', 'C']).astype(
-            'category', categories=['C', 'B', 'A'], ordered=True)
-
-        self.assertEqual(len(s[s > 'B']), 1)
-
     # https://datascience.stackexchange.com/questions/12645/how-to-count-the-number-of-missing-values-in-each-row-in-pandas-dataframe
     def test_counting_null(self):
         s = pd.Series([0, np.nan, None])
@@ -58,59 +52,6 @@ class PandasTest(unittest.TestCase):
         x = np.array([1, 2, 3])
         self.assertArrayEqual(x[:, np.newaxis], [[1], [2], [3]])
         self.assertArrayEqual(x[np.newaxis, :], [[1, 2, 3]])
-
-    def test_series_dtype(self):
-        self.assertEqual(str(pd.Series([1]).dtype), 'int64')
-        self.assertEqual(str(pd.Series([1, None]).dtype), 'float64')
-        self.assertEqual(str(pd.Series(['a', None]).dtype), 'object')
-
-    def test_series_nan(self):
-        nan = pd.Series([1, None])[1]
-        self.assertEqual(str(nan), 'nan')
-        self.assertNotEqual(nan, np.nan)
-        self.assertTrue(np.isnan(nan))
-
-    def test_series_dictionary(self):
-        numbers = {'one': 1, 'two': 2}
-        s = pd.Series(numbers)
-        self.assertArrayEqual(s.index.values, ['one', 'two'])
-        self.assertArrayEqual(s.values, [1, 2])
-
-        s = pd.Series([1, 2], index=['one', 'two'])
-        self.assertArrayEqual(s.index.values, ['one', 'two'])
-        self.assertArrayEqual(s.values, [1, 2])
-
-        s = pd.Series(s, index=['one', 'three'])
-        self.assertEqual(s[0], 1)
-        self.assertEqual(s.index[0], 'one')
-        self.assertTrue(np.isnan(s[1]))
-        self.assertEqual(s.index[1], 'three')
-
-    def test_series_name(self):
-        s = pd.Series([1, 2], name='numbers')
-        self.assertEqual(s.name, 'numbers')
-
-    def test_querying_series(self):
-        numbers = {'one': 1, 'two': 2}
-        s = pd.Series(numbers)
-
-        self.assertEqual(s.iloc[1], 2)
-        self.assertEqual(s.loc['one'], 1)
-
-        # not recommended as labels can be number
-        self.assertEqual(s[1], 2)
-        self.assertEqual(s['one'], 1)
-
-        # vectorized calculation is much faster
-        self.assertEqual(np.sum(s), 3)
-
-        s += 2
-        self.assertEqual(np.sum(s), 7)
-
-        # append doesn't change the original object
-        new_s = s.append(pd.Series({'three': 3}))
-        self.assertEqual(len(s), 2)
-        self.assertEqual(len(new_s), 3)
 
 
 if __name__ == '__main__':
