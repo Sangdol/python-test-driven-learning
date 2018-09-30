@@ -9,6 +9,15 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_period_index():
+    quarter_period = pd.PeriodIndex(['2010-01', '2010-02', '2010-04', '2010-10'], freq='Q')
+
+    # https://stackoverflow.com/questions/34800343/python-pandas-convert-type-from-pandas-period-to-string
+    assert_array_equal(quarter_period.strftime('%YQ%q'), ['2010Q1', '2010Q1', '2010Q2', '2010Q4'])
+    assert_array_equal(quarter_period.map(str), ['2010Q1', '2010Q1', '2010Q2', '2010Q4'])
+    assert_array_equal(quarter_period.to_series().astype(str), ['2010Q1', '2010Q1', '2010Q2', '2010Q4'])
+
+
 def test_cut():
     s = pd.Series([0, 1, 2])
     s_labeled = pd.cut(s, 3, labels=['S', 'M', 'L'])
