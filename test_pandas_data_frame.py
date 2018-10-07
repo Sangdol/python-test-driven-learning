@@ -120,6 +120,7 @@ def test_indexing():
     df = df.reset_index()
     assert_array_equal(df.index, [0, 1, 2])
 
+    # By doing reset_index() followed by set_index() it can add index.
     df = df.set_index(['Location', 'Name'])
     assert df.loc['store1', 'note']['Cost'] == 10
 
