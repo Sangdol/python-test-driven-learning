@@ -7,6 +7,13 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_isin():
+    df = pd.DataFrame({'a': range(3)}, index=['i0', 'i1', 'i2'])
+
+    assert_array_equal(df['a'].isin([1, 2]), [False, True, True])
+    assert_array_equal(df.index.isin(['i0']), [True, False, False])
+
+
 def test_reset_index():
     df = pd.DataFrame({'a': range(3)})
 
