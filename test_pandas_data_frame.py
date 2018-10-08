@@ -7,6 +7,14 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+# https://stackoverflow.com/questions/9758450/pandas-convert-dataframe-to-array-of-tuples
+def test_data_frame_to_tuples():
+    df = pd.DataFrame({'a': range(2), 'b': range(2)}, index=['i0', 'i1'])
+
+    tuples = [tuple(x) for x in df.values]
+    assert_array_equal(tuples, [(0, 0), (1, 1)])
+
+
 def test_isin():
     df = pd.DataFrame({'a': range(3)}, index=['i0', 'i1', 'i2'])
 
