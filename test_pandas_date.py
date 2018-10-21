@@ -6,6 +6,12 @@ def test_timestamp():
     assert pd.Timestamp('9/17/2018 22:09').day == 17
 
 
+# https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior
+def test_strftime():
+    d = pd.to_datetime('2018-10-21')
+    assert d.strftime('%m%d') == '1021'
+
+
 def test_period():
     pp = pd.Period('9/2018')
     assert type(pp.freq).__name__ == 'MonthEnd'
