@@ -7,6 +7,18 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_assign():
+    item1 = pd.Series({'Name': 'note', 'Cost': 10})
+    item2 = pd.Series({'Name': 'pen', 'Cost': 5})
+    item3 = pd.Series({'Name': 'phone', 'Cost': 500})
+    df = pd.DataFrame([item1, item2, item3], index=['store1', 'store1', 'store2'])
+
+    name_cost = df.assign(NameCost=lambda x: x.Name + x.Cost.astype(str))['NameCost']
+
+    assert type(name_cost).__name__ == 'Series'
+    assert name_cost.iloc[0] == 'note10'
+
+
 # https://stackoverflow.com/questions/9758450/pandas-convert-dataframe-to-array-of-tuples
 def test_data_frame_to_tuples():
     df = pd.DataFrame({'a': range(2), 'b': range(2)}, index=['i0', 'i1'])
