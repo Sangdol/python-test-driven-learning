@@ -11,6 +11,11 @@ class NumpyTest(unittest.TestCase):
         if not np.array_equal(arr1, arr2):
             self.fail("{} is not {}".format(arr1, arr2))
 
+    # Cannot get 'day' from datetime64. Use pd.to_datetime('') instead
+    def test_date_comparison(self):
+        self.assertTrue(np.datetime64('2018-01-01') < np.datetime64('2018-01-02'))
+        self.assertTrue(np.datetime64('2018-01-01') == np.datetime64('2018-01-01'))
+
     # https://stackoverflow.com/questions/41550746/error-using-astype-when-nan-exists-in-a-dataframe
     def test_nan_type(self):
         self.assertEqual(type(np.nan).__name__, 'float')
