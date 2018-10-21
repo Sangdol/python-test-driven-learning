@@ -34,6 +34,11 @@ class SequenceTest(unittest.TestCase):
         self.assertEqual('he' * 3, 'hehehe')
         self.assertEqual('hello world'.split(' ')[-1], 'world')
 
+    def test_dictionary_functions(self):
+        x = {'hello': 'world'}
+
+        self.assertEqual(x.get('hi', 'default'), 'default')
+
     def test_dictionary(self):
         x = {'hello': 'world'}
         self.assertEqual(x['hello'], 'world')
