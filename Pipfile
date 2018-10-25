@@ -11,6 +11,9 @@ matplotlib = "*"
 ipython = "*"
 ipykernel = "*"
 scipy = "*"
+sklearn-pandas = "*"
+scikit-learn = "*"
+pytest = "*"
 
 [dev-packages]
 ptpython = "*"
