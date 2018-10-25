@@ -171,6 +171,7 @@ def test_boolean_mask():
     only_cheap = df[df['Cost'] < 50]
     assert len(only_cheap) == 2
 
+    # parens are important e.g., (df['Cost'] < 50)
     only_cheap_note = df[(df['Cost'] < 50) & (df['Name'] == 'note')]
     assert len(only_cheap_note) == 1
 
