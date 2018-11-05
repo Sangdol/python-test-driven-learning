@@ -2,6 +2,13 @@ import pytest
 import stub.package_test_add as test_add
 
 
+# No way to get a full name
+# https://stackoverflow.com/questions/15165101/how-to-get-full-type-name-in-python
+def test_module_and_name():
+    assert type({}).__module__ == 'builtins'
+    assert type({}).__name__ == 'dict'
+
+
 # https://stackoverflow.com/questions/1823058/how-to-print-number-with-commas-as-thousands-separators
 def test_number_to_comma_str():
     assert "{:,}".format(1000000.1234) == '1,000,000.1234'
