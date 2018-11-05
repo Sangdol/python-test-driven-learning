@@ -7,6 +7,16 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_values_vs_tolist():
+    s = pd.Series([1, 'a'])
+
+    assert type(s.values).__module__ == 'numpy'
+    assert type(s.values).__name__ == 'ndarray'
+
+    assert type(s.tolist()).__module__ == 'builtins'
+    assert type(s.tolist()).__name__ == 'list'
+
+
 def test_series_category():
     s = pd.Series(['A', 'B', 'C'], index=['A', 'B', 'C']).astype(
         'category', categories=['C', 'B', 'A'], ordered=True)
