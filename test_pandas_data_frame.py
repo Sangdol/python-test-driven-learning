@@ -7,6 +7,20 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+# https://stackoverflow.com/questions/15705630/python-getting-the-row-which-has-the-max-value-in-groups-using-groupby
+def test_max_min_in_group():
+    df = pd.DataFrame({
+        'count': [1, 2, 3, 4],
+        'group': ['a', 'a', 'b', 'b']
+    })
+
+    df = df.sort_values('count', ascending=False).drop_duplicates(['group'])
+
+    assert len(df) == 2
+    assert_array_equal(df.iloc[0, :].tolist(), [4, 'b'])
+    assert_array_equal(df.iloc[1, :].tolist(), [2, 'a'])
+
+
 def test_assign():
     item1 = pd.Series({'Name': 'note', 'Cost': 10})
     item2 = pd.Series({'Name': 'pen', 'Cost': 5})
