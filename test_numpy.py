@@ -9,6 +9,17 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def assert_array_not_equal(arr1, arr2):
+    if np.array_equal(arr1, arr2):
+        raise ValueError("{} is {}".format(arr1, arr2))
+
+
+def test_array_comparison():
+    assert_array_not_equal(np.array(1, dtype=object), [1])  # dtype matters
+    assert_array_equal(np.array([1]), [1])
+    assert_array_equal(np.array([1], dtype=int), [1])
+
+
 # Cannot get 'day' from datetime64. Use pd.to_datetime('') instead
 def test_date_comparison():
     assert np.datetime64('2018-01-01') < np.datetime64('2018-01-02')
