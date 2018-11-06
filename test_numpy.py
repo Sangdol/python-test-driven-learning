@@ -14,6 +14,12 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+def test_shape():
+    assert_array_equal(np.array([1, 2]).shape, (2,))
+    assert_array_equal(np.array([[1, 2]]).shape, (1, 2))
+    assert_array_equal(np.array([[1, 2, 3], [1, 2, 3]]).shape, (2, 3))
+
+
 def test_array_comparison():
     assert_array_not_equal(np.array(1, dtype=object), [1])  # dtype matters
     assert_array_equal(np.array([1]), [1])
