@@ -22,14 +22,16 @@ def test_mapping_columns_to_transformations():
                          'salary':   [90., 24, 44, 27,
                                       32, 59, 36, 27]})
 
+    # Some transformers expect a 1-dimensional input (the label-oriented ones)
+    # OneHotEncoder or Imputer expect 2-dimensional input ([n_samples, n_features]. )
     mapper = DataFrameMapper([
         (
-            'pet',  # a column name.
+            'pet',  # a column name. (1-d input)
             sklearn.preprocessing.LabelBinarizer()  # transformer
             # a dictionary -  optional transformation options
          ),
         (
-            ['children'],  # can be a list.
+            ['children'],  # can be a list. (2-d input)
             sklearn.preprocessing.StandardScaler()
         )
     ])
