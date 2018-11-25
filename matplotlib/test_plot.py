@@ -1,14 +1,23 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.figure()
-# subplot with 1 row, 2 columns, and current axis is 1st subplot axes
-plt.subplot(1, 2, 1)
 
-linear_data = np.array([1, 2, 3, 4, 5, 6, 7, 8])
+# https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html
+def test_basic_plot():
+    lines = plt.plot(1, 3)
+    assert len(lines) == 1
 
-plt.plot(linear_data, '-o')
-plt.show()
+    default_line = lines[0]
+    assert default_line.get_linestyle() == '-'  # Default line style
+    assert default_line.get_data() == ([1], [3])
+    assert default_line.get_color() == '#9467bd'
+    assert default_line.get_marker() == 'None'
 
-plt.plot(linear_data ** 2, '-o')
-plt.show()
+    # fmt = '[color][marker][line]'
+    lines = plt.plot(1, 3, '.')
+
+    marker_line = lines[0]
+    assert marker_line.get_linestyle() == 'None'
+    assert marker_line.get_data() == ([1], [3])
+    assert marker_line.get_color() == '#8c564b'
+    assert marker_line.get_marker() == '.'
