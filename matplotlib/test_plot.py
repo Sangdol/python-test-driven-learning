@@ -3,6 +3,10 @@ import numpy as np
 import pytest
 
 
+def setup_module():
+    plt.figure()
+
+
 # https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html
 def test_basic_plot():
     lines = plt.plot(1, 3)
@@ -11,7 +15,6 @@ def test_basic_plot():
     default_line = lines[0]
     assert default_line.get_linestyle() == '-'  # Default line style
     assert default_line.get_data() == ([1], [3])
-    assert default_line.get_color() == '#9467bd'
     assert default_line.get_marker() == 'None'
 
     # fmt = '[color][marker][line]'
@@ -20,7 +23,6 @@ def test_basic_plot():
     marker_line = lines[0]
     assert marker_line.get_linestyle() == 'None'
     assert marker_line.get_data() == ([1], [3])
-    assert marker_line.get_color() == '#8c564b'
     assert marker_line.get_marker() == '.'
 
 
@@ -47,3 +49,33 @@ def test_plot_without_scripting_layer():
     # you can see this figure in your Jupyter workspace afterwards by going to
     # https://hub.coursera-notebooks.org/
     canvas.print_png('test.png')
+
+
+# https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.axis.html
+def test_axis():
+    # plot the point (3,2) using the circle marker
+    plt.plot(3, 2, 'o')
+
+    # get the current axes
+    ax = plt.gca()
+    assert ax.axis() == (2.835, 3.165, 1.89, 2.1100000000000003)
+
+    # Set axis properties [xmin, xmax, ymin, ymax]
+    ax.axis([0, 6, 0, 10])
+    assert ax.axis() == (0, 6, 0, 10)
+
+    artists = ax.get_children()
+
+    assert len(artists) == 11
+    assert list(map(lambda a: str(type(a)), artists)) == [
+        "<class 'matplotlib.lines.Line2D'>",
+        "<class 'matplotlib.spines.Spine'>",
+        "<class 'matplotlib.spines.Spine'>",
+        "<class 'matplotlib.spines.Spine'>",
+        "<class 'matplotlib.spines.Spine'>",
+        "<class 'matplotlib.axis.XAxis'>",
+        "<class 'matplotlib.axis.YAxis'>",
+        "<class 'matplotlib.text.Text'>",
+        "<class 'matplotlib.text.Text'>",
+        "<class 'matplotlib.text.Text'>",
+        "<class 'matplotlib.patches.Rectangle'>"]
