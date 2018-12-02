@@ -15,6 +15,7 @@ scikit-learn = "*"
 pytest = "*"
 pytest-testmon = "*"
 matplotlib = "*"
+pyspark = "*"
 
 [dev-packages]
 ptpython = "*"
