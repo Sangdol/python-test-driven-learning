@@ -7,6 +7,29 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_isnull():
+    df = pd.DataFrame({
+        'count': [None, None],
+        'group': [None, None]
+    })
+
+    assert df.isnull().all().to_dict() == {'count': True, 'group': True}
+    assert df.isnull().all().all()
+
+
+# https://stackoverflow.com/questions/28218698/how-to-iterate-over-columns-of-pandas-dataframe-to-run-regression
+def test_column_iteration():
+    df = pd.DataFrame({
+        'count': [1, 2, 3, 4],
+        'group': ['a', 'a', 'b', 'b']
+    })
+
+    columns = []
+    for column in df:
+        columns.append(column)
+
+    assert_array_equal(columns, ['count', 'group'])
+
 # https://stackoverflow.com/questions/15705630/python-getting-the-row-which-has-the-max-value-in-groups-using-groupby
 def test_max_min_in_group():
     df = pd.DataFrame({
