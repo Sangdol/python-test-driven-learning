@@ -26,4 +26,4 @@ plt.text(x2.mean() - 1.5, 0.5, 'x2\nGamma')
 plt.text(x3.mean() - 1.5, 0.5, 'x3\nExponential')
 plt.text(x4.mean() - 1.5, 0.5, 'x4\nUniform')
 
-plt.show()
+# plt.show()
