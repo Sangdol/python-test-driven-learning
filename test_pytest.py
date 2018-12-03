@@ -3,6 +3,12 @@ import pytest
 from numpy.testing import assert_array_equal
 
 
+# setup / teardown
+# https://docs.pytest.org/en/latest/xunit_setup.html
+def setup_module():
+    pass
+
+
 def test_simple():
     assert 3 == 3
 
