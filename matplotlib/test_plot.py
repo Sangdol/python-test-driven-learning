@@ -1,10 +1,13 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import pytest
 
 
-def setup_module():
+def setup_function():
     plt.figure()
+
+
+def teardown_function():
+    plt.clf()
 
 
 # https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html

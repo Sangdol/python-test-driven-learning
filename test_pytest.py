@@ -5,7 +5,11 @@ from numpy.testing import assert_array_equal
 
 # setup / teardown
 # https://docs.pytest.org/en/latest/xunit_setup.html
-def setup_module():
+def setup_module():  # class / method / function
+    pass
+
+
+def teardown_module():  # class / method / function
     pass
 
 
