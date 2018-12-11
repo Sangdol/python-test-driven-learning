@@ -1,3 +1,8 @@
+"""
+
+https://spark.apache.org/docs/2.2.0/api/python/pyspark.sql.html#pyspark.sql.DataFrame.write
+
+"""
 from pyspark.sql import SparkSession
 
 spark = SparkSession \
