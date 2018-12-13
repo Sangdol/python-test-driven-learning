@@ -27,10 +27,9 @@ def test_datetime_format():
 
 
 def test_datetime():
-    # epoch
-    assert tm.time() > 0
+    assert tm.time() > 0  # epoch in float e.g., 1544707185.613296
 
-    dtnow = dt.datetime.fromtimestamp(tm.time())
+    dtnow = dt.datetime.fromtimestamp(tm.time(), dt.timezone.utc)
     assert dtnow.year > 2017
 
     delta = dt.timedelta(days=100)
