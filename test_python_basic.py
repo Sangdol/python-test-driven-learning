@@ -1,5 +1,4 @@
 import pytest
-import stub.package_test_add as test_add
 
 
 # No way to get a full name
@@ -60,8 +59,4 @@ def test_if_statement():
     else:
         pytest.fail()
 
-
-# https://stackoverflow.com/questions/8683178/chained-method-calls-indentation-style-in-python
-def test_import():
-    assert test_add.add(1, 2) == 3
 
