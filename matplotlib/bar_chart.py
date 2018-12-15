@@ -42,5 +42,5 @@ def clean_bar_chart():
     plt.show(block=False)
 
 
-# bar_chart()
-# clean_bar_chart()
+bar_chart()
+clean_bar_chart()

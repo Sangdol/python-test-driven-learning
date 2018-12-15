@@ -28,4 +28,4 @@ def animate():
     a = animation.FuncAnimation(fig, update, interval=100)
 
 
-# animate()
+animate()
