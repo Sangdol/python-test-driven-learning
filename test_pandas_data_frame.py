@@ -7,6 +7,37 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+# Orient options: dict, list, series, split, records, index
+# https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_dict.html#pandas.DataFrame.to_dict
+def test_to_dict_orient():
+    df = pd.DataFrame({'num': [0, 1], 'str': ['hello', 'dict']}, index=['a', 'b'])
+
+    # default orient is 'dict'
+    assert df.to_dict() == {'num': {'a': 0, 'b': 1}, 'str': {'a': 'hello', 'b': 'dict'}}
+
+    # list
+    assert df.to_dict('list') == {'num': [0, 1], 'str': ['hello', 'dict']}
+
+    # series
+    actual = df.to_dict('series')
+    expected = {'num': pd.Series([0, 1], index=['a', 'b']),
+                'str': pd.Series(['hello', 'dict'], index=['a', 'b'])}
+
+    assert actual.get('num').equals(expected.get('num'))
+    assert actual.get('str').equals(expected.get('str'))
+
+    # split
+    assert df.to_dict('split') == {'index': ['a', 'b'],
+                                   'columns': ['num', 'str'],
+                                   'data': [[0, 'hello'], [1, 'dict']]}
+
+    # records (no index)
+    assert df.to_dict('records') == [{'num': 0, 'str': 'hello'}, {'num': 1, 'str': 'dict'}]
+
+    # index
+    assert df.to_dict('index') == {'a': {'num': 0, 'str': 'hello'}, 'b': {'num': 1, 'str': 'dict'}}
+
+
 def test_isnull():
     df = pd.DataFrame({
         'count': [None, None],
@@ -29,6 +60,7 @@ def test_column_iteration():
         columns.append(column)
 
     assert_array_equal(columns, ['count', 'group'])
+
 
 # https://stackoverflow.com/questions/15705630/python-getting-the-row-which-has-the-max-value-in-groups-using-groupby
 def test_max_min_in_group():
