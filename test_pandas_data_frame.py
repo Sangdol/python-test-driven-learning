@@ -128,6 +128,11 @@ def test_dropna():
     assert len(df.dropna(subset=['a'])) == 1
     assert len(df.dropna(subset=['b'])) == 2
 
+    # delete column
+    # https://stackoverflow.com/questions/10857924/remove-null-columns-in-a-dataframe-pandas
+    df = pd.DataFrame({'a': [np.nan, 11, np.nan], 'b': ['A', np.nan, 'C'], 'c': [np.nan, np.nan, np.nan]})
+    assert_array_equal(df.dropna(axis=1, how='all').columns, ['a', 'b'])
+
 
 def test_sum():
     df = pd.DataFrame({'a': [1, 2, 3], 'b': ['A', 'B', 'C']})
