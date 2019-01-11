@@ -50,6 +50,23 @@ def test_extra_args():
     assert kwargs == {"a": 1, "b": "b"}
 
 
+# https://stackoverflow.com/questions/132988/is-there-a-difference-between-and-is-in-python
+def test_if_equal_vs_is():
+    """
+    `is` reference equality
+    `==` value equality
+    """
+
+    a = 1
+    assert a is 1  # This is True as Python caches small integer objects
+    assert a == 1
+
+    # https://stackoverflow.com/questions/15171695/whats-with-the-integer-cache-inside-python
+    b = 1000
+    assert a is 10**0
+    assert b is not 10**3
+
+
 def test_if_statement():
     a = 10
     if a > 5:
