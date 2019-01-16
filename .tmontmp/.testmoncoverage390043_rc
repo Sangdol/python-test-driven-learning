@@ -1,6 +1,0 @@
-[run]
-data_file = /Users/slee/projects/python-test-driven-learning/.tmontmp/.testmoncoverage390043
-include = /Users/slee/projects/python-test-driven-learning/*
-omit = /Users/slee/.local/share/virtualenvs/python-test-driven-learning-xNO0eqDN/bin/../*
- /usr/local/Cellar/python/3.7.0/Frameworks/Python.framework/Versions/3.7/*
-parallel=True
