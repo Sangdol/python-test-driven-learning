@@ -1,3 +1,18 @@
+# https://stackoverflow.com/questions/354038/how-do-i-check-if-a-string-is-a-number-float
+def test_is_number():
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
+
+    assert is_number('123')
+    assert is_number('12.3')
+    assert is_number('-12.3')
+    assert not is_number('ab1')
+
+
 def test_isnumeric():
     assert '123'.isnumeric()
     assert not '-123'.isnumeric()
