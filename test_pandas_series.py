@@ -7,6 +7,14 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+# https://stackoverflow.com/questions/45338209/filtering-string-float-interger-values-in-columns-pandas
+def test_filter_numbers():
+    s = pd.Series([1, 'a', '3', '-1.1'])
+
+    assert_array_equal(pd.to_numeric(s, errors='coerce').dropna(), [1, 3, -1.1])
+    assert_array_equal(s[pd.to_numeric(s, errors='coerce').notnull()], pd.Series([1, '3', '-1.1']))
+
+
 def test_values_vs_tolist():
     s = pd.Series([1, 'a'])
 
