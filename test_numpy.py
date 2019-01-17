@@ -14,6 +14,11 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+def test_close_comparison():
+    assert np.isclose(1.00000001, 1)
+    assert np.allclose([1.00000001, 2.0000000001], [1, 2])
+
+
 def test_shape():
     assert_array_equal(np.array([1, 2]).shape, (2,))
     assert_array_equal(np.array([[1, 2]]).shape, (1, 2))
