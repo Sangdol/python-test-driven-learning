@@ -7,6 +7,17 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+#
+def test_to_records():
+    df = pd.DataFrame({'num': [0, 1], 'str': ['hello', 'dict']}, index=['a', 'b'])
+
+    assert_array_equal(df.to_records(), np.array([('a', 0, 'hello'), ('b', 1, 'dict')],
+                                                 dtype=[('index', 'O'), ('num', '<i8'), ('str', 'O')]))
+
+    assert_array_equal(df.to_records(index=False), np.array([(0, 'hello'), (1, 'dict')],
+                                                            dtype=[('num', '<i8'), ('str', 'O')]))
+
+
 # Orient options: dict, list, series, split, records, index
 # https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_dict.html#pandas.DataFrame.to_dict
 def test_to_dict_orient():
