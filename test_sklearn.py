@@ -9,6 +9,15 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+# https://stackoverflow.com/questions/38105539/how-to-convert-a-scikit-learn-dataset-to-a-pandas-dataset
+def test_datasets_to_dataframe():
+    iris = load_iris()
+    df = pd.DataFrame(data=np.c_[iris.data, iris.target],
+                      columns=(iris.feature_names + ['target']))
+
+    assert df.shape == (150, 5)
+
+
 # https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html
 def test_datasets():
     iris = load_iris()
@@ -20,6 +29,7 @@ def test_datasets():
     assert type(iris.data).__name__ == 'ndarray'
     assert iris.target.shape == (150,)
     assert type(iris.target).__name__ == 'ndarray'
+    assert_array_equal(np.unique(iris.target), [0, 1, 2])
 
     assert iris.filename.find('sklearn/datasets/data/iris.csv') > -1  # file location
 
