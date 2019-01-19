@@ -14,6 +14,21 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+# https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.r_.html
+def test_r_():
+    assert_array_equal(np.array([1, 2, 3, 4, 5]), np.r_[[1], 2, 3, [4, 5]])
+
+
+# https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.c_.html
+def test_c_():
+    N = 3
+    A = np.eye(N)
+
+    assert_array_equal(np.c_[A, np.ones(N)], [[1., 0., 0., 1.],
+                                              [0., 1., 0., 1.],
+                                              [0., 0., 1., 1.]])
+
+
 def test_close_comparison():
     assert np.isclose(1.00000001, 1)
     assert np.allclose([1.00000001, 2.0000000001], [1, 2])
