@@ -184,7 +184,7 @@ def test_groupby_agg():
 def test_groupby_apply():
     df = pd.DataFrame({'a': [1, 2, 3], 'b': ['A', 'A', 'B']})
 
-    sums_s = df.groupby('b').apply(lambda df, a: sum(df[a]), 'a')
+    sums_s = df.groupby('b').apply(lambda ddf, a: sum(ddf[a]), 'a')
     assert sums_s['A'] == 3
     assert sums_s['B'] == 3
 
