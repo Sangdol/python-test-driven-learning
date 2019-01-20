@@ -31,6 +31,12 @@ def test_list():
     assert 'hello world'.split(' ')[-1] == 'world'
 
 
+def test_dict_list():
+    l = [('a', 1), ('b', 2)]
+
+    assert dict(l) == {'a': 1, 'b': 2}
+
+
 # https://docs.python.org/3/library/stdtypes.html#dictionary-view-objects
 def test_dictionary_view_objects():
     x = {'a': 1, 'b': 2}
