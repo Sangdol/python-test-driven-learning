@@ -174,6 +174,27 @@ def test_groupby_dict():
     assert size_of_sums_s.name == 'a'
 
 
+def test_groupby_iteration():
+    df = pd.DataFrame({'a': [1, 2, 3], 'b': ['A', 'A', 'B']})
+
+    keys = []
+    groups = []
+    for key, group in df.groupby('b'):
+        keys.append(key)
+        groups.append(group)
+
+    g1 = pd.DataFrame(data={'a': [1, 2], 'b': ['A', 'A']}, index=[0, 1])
+    g2 = pd.DataFrame(data={'a': [3], 'b': ['B']}, index=[2])
+
+    assert keys == ['A', 'B']
+    assert groups[0].equals(g1)
+    assert groups[1].equals(g2)
+
+    l = list(df.groupby('b'))  # [('A', g1, 'B', g2)]
+    assert l[0][0] == 'A'
+    assert l[0][1].equals(g1)
+
+
 def test_groupby_agg():
     df = pd.DataFrame({'a': [1, 2, 3], 'b': ['A', 'A', 'B']})
     sums_df = df.groupby('b').agg({'a': sum})
