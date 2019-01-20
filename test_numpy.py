@@ -14,6 +14,18 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+# Data Type Objects - https://docs.scipy.org/doc/numpy-1.10.1/reference/arrays.dtypes.html
+# The Array Interface - https://docs.scipy.org/doc/numpy-1.10.1/reference/arrays.interface.html#arrays-interface
+def test_dtypes():
+    dt = np.dtype('>i4')
+
+    assert dt.byteorder == '>'
+    assert dt.itemsize == 4
+    assert dt.name == 'int32'
+    assert dt.type is np.int32
+    assert dt.str == '>i4'
+
+
 # https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.r_.html
 def test_r_():
     assert_array_equal(np.array([1, 2, 3, 4, 5]), np.r_[[1], 2, 3, [4, 5]])
