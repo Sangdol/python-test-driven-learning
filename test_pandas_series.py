@@ -7,6 +7,39 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_groupby_multi_keys():
+    s = pd.Series([1, 2, 3, 4, 5, 6, 7, 8])
+    k1 = pd.Series(['a', 'a', 'a', 'a', 'b', 'b', 'b', 'b'])
+    k2 = pd.Series(['c', 'c', 'd', 'd', 'e', 'e', 'f', 'f'])
+
+    # a  c    1.5
+    #    d    3.5
+    # b  e    5.5
+    #    f    7.5
+    # dtype: float64
+    assert_array_equal(s.groupby([k1, k2]).mean(), [1.5, 3.5, 5.5, 7.5])
+
+
+def test_groupby():
+    s = pd.Series(['a', 'b', 'b'])
+
+    # self groupby
+    assert s.groupby(s).agg('count').equals(
+        pd.Series(data=[1, 2], index=['a', 'b']))
+    # count - excluding missing values
+    assert s.groupby(s).count().equals(
+        pd.Series(data=[1, 2], index=['a', 'b']))
+    assert s.groupby(s).size().equals(
+        pd.Series(data=[1, 2], index=['a', 'b']))
+
+    # groupby by other series
+    s = pd.Series([1, 1, 2])
+    assert s.groupby(pd.Series(['a', 'b', 'b'])).agg('sum').equals(
+        pd.Series(data=[1, 3], index=['a', 'b']))
+    assert s.groupby(pd.Series(['a', 'b', 'b'])).sum().equals(
+        pd.Series(data=[1, 3], index=['a', 'b']))
+
+
 # https://stackoverflow.com/questions/45338209/filtering-string-float-interger-values-in-columns-pandas
 def test_filter_numbers():
     s = pd.Series([1, 'a', '3', '-1.1'])
