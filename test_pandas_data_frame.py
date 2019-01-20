@@ -202,6 +202,18 @@ def test_groupby_iteration():
     assert l[0][1].equals(g1)
 
 
+def test_groupby_dtypes():
+    df = pd.DataFrame({'a': [1, 2], 'b': ['A', 'A'], 'c': [0, 0]})
+
+    grouped = list(df.groupby(df.dtypes, axis=1))
+    g1 = pd.DataFrame(data={'a': [1, 2], 'c': [0, 0]})
+    g2 = pd.DataFrame({'b': ['A', 'A']})
+
+    # [(dtype('int64'), g1, (dtype('O'), g2)]
+    assert grouped[0][1].equals(g1)
+    assert grouped[1][1].equals(g2)
+
+
 def test_groupby_agg():
     df = pd.DataFrame({'a': [1, 2, 3], 'b': ['A', 'A', 'B']})
     sums_df = df.groupby('b').agg({'a': sum})
