@@ -7,7 +7,14 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
-#
+def test_dtypes():
+    df = pd.DataFrame({'num': [0, 1], 'str': ['hello', 'dict']}, index=['a', 'b'])
+
+    assert df.dtypes.equals(
+        pd.Series(data=[np.int64, np.object], index=['num', 'str']))
+    assert df.index.dtype == np.object
+
+
 def test_to_records():
     df = pd.DataFrame({'num': [0, 1], 'str': ['hello', 'dict']}, index=['a', 'b'])
 
