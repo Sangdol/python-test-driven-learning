@@ -14,6 +14,17 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+def test_reshape():
+    arr = np.array([1, 2, 3])
+
+    assert_array_equal(arr.reshape(1, 3), [[1, 2, 3]])
+    assert_array_equal(arr.reshape(1, -1), [[1, 2, 3]])
+
+    arr = np.array([1, 2, 3, 4, 5, 6])
+    assert_array_equal(arr.reshape(2, 3), [[1, 2, 3], [4, 5, 6]])
+    assert_array_equal(arr.reshape(2, -1), [[1, 2, 3], [4, 5, 6]])
+
+
 # Data Type Objects - https://docs.scipy.org/doc/numpy-1.10.1/reference/arrays.dtypes.html
 # The Array Interface - https://docs.scipy.org/doc/numpy-1.10.1/reference/arrays.interface.html#arrays-interface
 def test_dtypes():
