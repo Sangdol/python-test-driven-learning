@@ -41,6 +41,13 @@ def test_dtypes():
 def test_r_():
     assert_array_equal(np.array([1, 2, 3, 4, 5]), np.r_[[1], 2, 3, [4, 5]])
 
+    try:
+        any = np.r_[[[1]], 2, 3, [4, 5]]
+        pytest.fail(any)
+    except ValueError:
+        # ValueError: all the input arrays must have same number of dimensions
+        pass
+
 
 # https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.c_.html
 def test_c_():
@@ -50,6 +57,14 @@ def test_c_():
     assert_array_equal(np.c_[A, np.ones(N)], [[1., 0., 0., 1.],
                                               [0., 1., 0., 1.],
                                               [0., 0., 1., 1.]])
+
+    assert_array_equal(np.c_[np.ones(N), A], [[1., 1., 0., 0.],
+                                              [1., 0., 1., 0.],
+                                              [1., 0., 0., 1.]])
+
+    assert_array_equal(np.c_[A, A], [[1., 0., 0., 1., 0., 0.],
+                                     [0., 1., 0., 0., 1., 0.],
+                                     [0., 0., 1., 0., 0., 1.]])
 
 
 def test_close_comparison():
