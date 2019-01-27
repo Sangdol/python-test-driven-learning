@@ -3,11 +3,24 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
 
 
 def assert_array_equal(arr1, arr2):
     if not np.array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
+
+
+def test_min_max_scaler():
+    X = list(zip(np.arange(0, 10), np.arange(1000, 1010)))
+
+    scaler = MinMaxScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    assert np.allclose(X_scaled[0], [0, 0])
+    assert np.allclose(X_scaled[1], [0.1111111, 0.1111111])
+    assert np.allclose(X_scaled[2], [0.2222222, 0.2222222])
+    assert np.allclose(X_scaled[9], [1, 1])
 
 
 # https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
