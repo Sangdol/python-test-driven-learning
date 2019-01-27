@@ -24,6 +24,7 @@ def test_reshape():
 
     assert_array_equal(arr.reshape(1, 3), [[1, 2, 3]])
     assert_array_equal(arr.reshape(1, -1), [[1, 2, 3]])
+    assert_array_equal(arr.reshape(-1, 1), [[1], [2], [3]])
 
     arr = np.array([1, 2, 3, 4, 5, 6])
     assert_array_equal(arr.reshape(2, 3), [[1, 2, 3], [4, 5, 6]])
