@@ -1,6 +1,32 @@
 import pytest
 
 
+def test_zip_iteration():
+    x = y = range(2)
+
+    zipped = zip(x, y)
+    assert list(zipped) == [(0, 0), (1, 1)]
+    assert list(zipped) == []
+
+
+# https://docs.python.org/3.4/library/functions.html#zip
+def test_zip_upzip():
+    assert list(zip('abc', '12')) == [('a', '1'), ('b', '2')]
+    assert list(zip(range(3), (range(3)))) == [(0, 0), (1, 1), (2, 2)]
+
+    # unzip
+    x = [1, 2, 3]
+    y = [0, 0, 0]
+
+    zipped = zip(x, y)
+
+    assert list(zipped) == [(1, 0), (2, 0), (3, 0)]
+
+    x2, y2 = zip(*zip(x, y))
+    assert list(x2) == x
+    assert list(y2) == y
+
+
 # No way to get a full name
 # https://stackoverflow.com/questions/15165101/how-to-get-full-type-name-in-python
 def test_module_and_name():
