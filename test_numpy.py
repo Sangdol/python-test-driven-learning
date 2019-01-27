@@ -14,6 +14,11 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+def test_linspace_logspace():
+    assert_array_equal(np.linspace(1, 5, 3), [1, 3, 5])
+    assert_array_equal(np.logspace(1, 3, 3), [10**1, 10**2, 10**3])
+
+
 def test_reshape():
     arr = np.array([1, 2, 3])
 
