@@ -2,11 +2,31 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
 
 
 def assert_array_equal(arr1, arr2):
     if not np.array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
+
+
+# https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
+def test_train_test_split():
+    X = y = np.arange(100)
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+    assert len(X_train) == 75
+    assert len(y_train) == 75
+    assert len(X_test) == 25
+    assert len(y_test) == 25
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=0)
+
+    assert len(X_train) == 50
+    assert len(y_train) == 50
+    assert len(X_test) == 50
+    assert len(y_test) == 50
 
 
 # https://stackoverflow.com/questions/38105539/how-to-convert-a-scikit-learn-dataset-to-a-pandas-dataset
