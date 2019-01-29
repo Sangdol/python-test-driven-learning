@@ -17,6 +17,18 @@ def test_exc_info():
         assert traceback.format_exception(
             exc_type, exc_value, exc_traceback)[0] == 'Traceback (most recent call last):\n'
 
+    """
+    traceback.format_exc() returns stacktrace
+    """
+    try:
+        1 / 0
+    except:
+        formatted_lines = traceback.format_exc().splitlines()
+        assert formatted_lines[0] == 'Traceback (most recent call last):'
+        assert formatted_lines[1] == \
+               '  File "/Users/slee/projects/python-test-driven-learning/test_exception.py", line 24, in test_exc_info'
+        assert formatted_lines[2] == '    1 / 0', 'ZeroDivisionError: division by zero'
+
 
 def test_exception():
     try:
