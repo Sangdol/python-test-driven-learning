@@ -14,6 +14,17 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+def test_append():
+    """
+    Why can't I np.array([]).append([])?
+    - np.array() is for matrix. It's not a normal array.
+    """
+    assert_array_equal(np.append([1, 2], [3]), [1, 2, 3])
+    assert_array_equal(np.append([1, 2], [[3], [4]]), [1, 2, 3, 4])
+    assert_array_equal(np.append([[1, 2]], [[3, 4]], axis=0), [[1, 2], [3, 4]])
+    assert_array_equal(np.append([[1, 2]], [[3, 4]], axis=1), [[1, 2, 3, 4]])
+
+
 def test_mean():
     arr_1d = np.array([1, 2, 3])
 
