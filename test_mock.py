@@ -7,6 +7,13 @@ from unittest.mock import patch
 import pytest
 
 
+@patch('builtins.abs')
+@patch('builtins.print')
+def test_multiple_patch_decorator(mock_print, mock_abs):
+    assert mock_print is print
+    assert mock_abs is abs
+
+
 class PatchTest:
     pass
 
