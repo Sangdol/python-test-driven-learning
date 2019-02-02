@@ -14,6 +14,20 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+def test_bincount():
+    assert_array_equal(np.bincount(np.arange(3)), [1, 1, 1])
+    assert_array_equal(np.bincount(np.array([1, 3, 5, 1])), [0, 2, 0, 1, 0, 1])
+
+    # weight
+    assert_array_equal(np.bincount(np.array([1, 3, 5, 1]), [.1, .2, .3, .4]), [0, .5, 0, .2, 0, .3])
+
+    try:
+        np.bincount(np.arange(5, dtype=float))
+        pytest.fail('dtype have to be int')
+    except TypeError:
+        pass
+
+
 def test_append():
     """
     Why can't I np.array([]).append([])?
