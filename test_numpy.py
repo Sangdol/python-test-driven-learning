@@ -14,6 +14,29 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+def test_amax():
+    a = [[0, 1], [2, 3]]
+
+    assert np.amax(a) == 3
+    assert_array_equal(np.amax(a, axis=0), [2, 3])  # np.maximum() is faster
+    assert_array_equal(np.amax(a, axis=1), [1, 3])
+
+    a[0][0] = np.nan
+    assert np.isnan(np.amax(a))
+    assert np.nanmax(a) == 3
+
+    b = [[-1], [2]]
+    assert_array_equal(np.amax(b, axis=0), [2])
+    assert_array_equal(np.amax(b, axis=1), [-1, 2])
+
+    # -1: last dimension
+    # https://docs.scipy.org/doc/numpy-1.10.0/reference/generated/numpy.stack.html
+    assert_array_equal(np.amax(b, axis=-1), [-1, 2])
+
+    assert np.amax([5], initial=6) == 6
+    assert max([5], default=6) == 5
+
+
 def test_bincount():
     assert_array_equal(np.bincount(np.arange(3)), [1, 1, 1])
     assert_array_equal(np.bincount(np.array([1, 3, 5, 1])), [0, 2, 0, 1, 0, 1])
@@ -53,7 +76,7 @@ def test_mean():
 
 def test_linspace_logspace():
     assert_array_equal(np.linspace(1, 5, 3), [1, 3, 5])
-    assert_array_equal(np.logspace(1, 3, 3), [10**1, 10**2, 10**3])
+    assert_array_equal(np.logspace(1, 3, 3), [10 ** 1, 10 ** 2, 10 ** 3])
 
 
 def test_reshape():
