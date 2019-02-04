@@ -5,6 +5,11 @@ import datetime as dt
 import time as tm
 
 
+def test_time_comparison():
+    assert dt.datetime.now().time() >= dt.time(hour=0)
+    assert dt.datetime.now().time() <= dt.time(hour=23)
+
+
 def test_timezone():
     d = dt.datetime(2007, 12, 6, 15, 29, 43, 79060, tzinfo=dt.timezone.utc)
     assert d.isoformat() == '2007-12-06T15:29:43.079060+00:00'
