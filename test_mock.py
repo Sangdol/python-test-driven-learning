@@ -7,6 +7,22 @@ from unittest.mock import patch
 import pytest
 
 
+def test_patch_function():
+    with patch('builtins.print') as mock_print:
+        mock_print.side_effect = lambda _: 'hello'
+        assert print('hi') == 'hello'
+        mock_print.assert_called_with('hi')
+
+    # can't I mock str?
+    with patch('builtins.str') as mock_str:
+        mock_str.side_effect = lambda _: 'hello'
+        try:
+            assert str('hi') == 'hello'
+            pytest.fail()
+        except TypeError:
+            pass
+
+
 @patch('builtins.abs')
 @patch('builtins.print')
 def test_multiple_patch_decorator(mock_print, mock_abs):
