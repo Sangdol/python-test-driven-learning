@@ -7,6 +7,17 @@ from unittest.mock import patch
 import pytest
 
 
+def test_patch_object():
+    class Person:
+        def hi(self, target):
+            return 'hi, {}'.format(target)
+
+    with patch.object(Person, 'hi', return_value='hello') as mock_method:
+        person = Person()
+        assert person.hi('any') == 'hello'
+        mock_method.assert_called_once_with('any')
+
+
 def test_patch_function():
     with patch('builtins.print') as mock_print:
         mock_print.side_effect = lambda _: 'hello'
