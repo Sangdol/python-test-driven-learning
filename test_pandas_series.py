@@ -7,6 +7,11 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_logical_not():
+    assert_array_equal(-pd.Series([True, False]), [False, True])
+    assert_array_equal(~pd.Series([True, False]), [False, True])
+
+
 def test_groupby_multi_keys():
     s = pd.Series([1, 2, 3, 4, 5, 6, 7, 8])
     k1 = pd.Series(['a', 'a', 'a', 'a', 'b', 'b', 'b', 'b'])
