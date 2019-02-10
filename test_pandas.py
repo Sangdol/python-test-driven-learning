@@ -9,6 +9,13 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_get_dummies():
+    dummies = pd.get_dummies(list('aba'))
+
+    # uint8
+    assert pd.DataFrame({'a': [1, 0, 1], 'b': [0, 1, 0]}, dtype=np.uint8).equals(dummies)
+
+
 def test_period_index():
     quarter_period = pd.PeriodIndex(['2010-01', '2010-02', '2010-04', '2010-10'], freq='Q')
 
