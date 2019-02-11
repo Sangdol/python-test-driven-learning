@@ -4,11 +4,24 @@ from sklearn.linear_model import LinearRegression
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import Pipeline
 
 
 def assert_array_equal(arr1, arr2):
     if not np.array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
+
+
+def test_pipeline_linear_regression():
+    model = Pipeline([('poly', PolynomialFeatures(degree=3)),
+                      ('linear', LinearRegression())])
+
+    X = np.array([1, 2, 3])
+    y = [2, 4, 6]
+
+    model.fit(X.reshape(-1, 1), y)
+    assert model.predict([[1]]) == [2]
 
 
 def test_min_max_scaler():
