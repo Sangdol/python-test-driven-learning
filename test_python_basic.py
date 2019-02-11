@@ -1,6 +1,27 @@
 import pytest
 
 
+def test_enumerate():
+    list = [1, 2, 3]
+
+    indices = []
+    values = []
+
+    for i, v in enumerate(list):
+        indices.append(i)
+        values.append(v)
+
+    assert indices == [0, 1, 2]
+    assert values == list
+
+    indices = []
+
+    for i, v in enumerate(list, 10):
+        indices.append(i)
+
+    assert indices == [10, 11, 12]
+
+
 def test_zip_iteration():
     x = y = range(2)
 
