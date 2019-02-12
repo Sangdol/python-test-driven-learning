@@ -9,11 +9,29 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import r2_score
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import classification_report
 
 
 def assert_array_equal(arr1, arr2):
     if not np.array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
+
+
+def test_classification_report():
+    y = [1, 1, 0, 0]
+    y_pred = [1, 1, 1, 0]
+
+    report = classification_report(y, y_pred)
+    assert report == \
+'''              precision    recall  f1-score   support
+
+           0       1.00      0.50      0.67         2
+           1       0.67      1.00      0.80         2
+
+   micro avg       0.75      0.75      0.75         4
+   macro avg       0.83      0.75      0.73         4
+weighted avg       0.83      0.75      0.73         4
+'''
 
 
 def test_evaluation_metrics():
