@@ -8,11 +8,22 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import r2_score
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 
 def assert_array_equal(arr1, arr2):
     if not np.array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
+
+
+def test_evaluation_metrics():
+    y = [1, 1, 0, 0]
+    y_pred = [1, 1, 1, 0]
+
+    assert accuracy_score(y, y_pred) == 0.75
+    assert precision_score(y, y_pred) == 2/3
+    assert recall_score(y, y_pred) == 1
+    assert f1_score(y, y_pred) == 0.8
 
 
 def test_confusion_matrix():
