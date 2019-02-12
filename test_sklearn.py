@@ -6,11 +6,40 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import Pipeline
+from sklearn.metrics import r2_score
 
 
 def assert_array_equal(arr1, arr2):
     if not np.array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
+
+
+# https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html
+def test_r2_score():
+    y_true = [3, -0.5, 2, 7]
+    y_pred = [2.5, 0.0, 2, 8]
+
+    assert np.isclose(r2_score(y_true, y_pred), 0.9486)
+
+    y_true = [1, 2, 3]
+    y_pred = [1, 2, 3]
+
+    assert r2_score(y_true, y_pred) == 1
+
+    y_true = [1, 2, 3]
+    y_pred = [2, 2, 2]
+
+    assert r2_score(y_true, y_pred) == 0
+
+    y_true = [1, 2, 3]
+    y_pred = [3, 2, 1]
+
+    assert r2_score(y_true, y_pred) == -3
+
+    y_true = [1, 2, 3]
+    y_pred = [6, 4, 1]
+
+    assert r2_score(y_true, y_pred) == -15.5
 
 
 def test_pipeline_linear_regression():
