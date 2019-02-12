@@ -7,11 +7,26 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import r2_score
+from sklearn.metrics import confusion_matrix
 
 
 def assert_array_equal(arr1, arr2):
     if not np.array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
+
+
+def test_confusion_matrix():
+    """
+    Confusion matrix
+    [[TN, FP],
+    [FN, TP]]
+    """
+    y = [1, 1, 0, 0]
+    y_pred = [0, 0, 1, 1]
+    assert_array_equal(confusion_matrix(y, y_pred), [[0, 2], [2, 0]])
+
+    y_pred = [1, 1, 1, 0]
+    assert_array_equal(confusion_matrix(y, y_pred), [[1, 1], [0, 2]])
 
 
 # https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html
