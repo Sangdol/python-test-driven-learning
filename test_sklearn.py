@@ -10,11 +10,24 @@ from sklearn.metrics import r2_score
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.metrics import classification_report
+from sklearn.dummy import DummyClassifier
 
 
 def assert_array_equal(arr1, arr2):
     if not np.array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
+
+
+def test_dummy_classifier():
+    X = np.array([1, 2, 3]).reshape(-1, 1)
+    y = [1, 1, 0]
+    dummy_majority = DummyClassifier(strategy='most_frequent').fit(X, y)
+
+    assert_array_equal(dummy_majority.predict(X), [1, 1, 1])
+
+    dummy_stratified = DummyClassifier(strategy='stratified').fit(X, y)
+    pred = dummy_stratified.predict(X)
+    assert_array_equal(np.bincount(pred), [1, 2])  # 1 zero, 2 ones
 
 
 def test_classification_report():
