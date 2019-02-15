@@ -1,3 +1,16 @@
+def test_difference_set():
+    a = {1, 2, 3}
+    b = {2, 3, 4}
+
+    assert a - b == {1}
+    
+
+def test_intersection_of_sets():
+    a = [1, 2, 3]
+    b = [2, 3, 4]
+    assert set(a).intersection(set(b)) == {2, 3}
+
+
 def test_tuple():
     t = (1, 'a', 2, 'b')
     assert len(t) == 4
