@@ -1,22 +1,28 @@
 import pytest
 
 
+def test_e_number():
+    assert 1e3 == 1000
+    assert 1e-3 == 0.001
+    assert 1.1e3 == 1100
+
+
 def test_enumerate():
-    list = [1, 2, 3]
+    items = [1, 2, 3]
 
     indices = []
     values = []
 
-    for i, v in enumerate(list):
+    for i, v in enumerate(items):
         indices.append(i)
         values.append(v)
 
     assert indices == [0, 1, 2]
-    assert values == list
+    assert values == items
 
     indices = []
 
-    for i, v in enumerate(list, 10):
+    for i, v in enumerate(items, 10):
         indices.append(i)
 
     assert indices == [10, 11, 12]
@@ -110,8 +116,8 @@ def test_if_equal_vs_is():
 
     # https://stackoverflow.com/questions/15171695/whats-with-the-integer-cache-inside-python
     b = 1000
-    assert a is 10**0
-    assert b is not 10**3
+    assert a is 10 ** 0
+    assert b is not 10 ** 3
 
 
 def test_if_statement():
@@ -122,5 +128,3 @@ def test_if_statement():
         pytest.fail()
     else:
         pytest.fail()
-
-
