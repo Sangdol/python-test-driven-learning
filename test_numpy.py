@@ -14,6 +14,16 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+def test_argmin_argmax():
+    a = [[5, 4, 3], [10, 0, 5]]
+
+    assert np.argmin(a) == 4
+    assert_array_equal(np.argmin(a, axis=0), [0, 1, 0])
+    assert_array_equal(np.argmin(a, axis=1), [2, 1])
+
+    assert np.argmax(a) == 3
+
+
 # https://stackoverflow.com/questions/21494489/what-does-numpy-random-seed0-do
 def test_random_seed():
     np.random.seed(0)
