@@ -7,6 +7,7 @@ def test_file_read():
     assert file().read() == 'abc\n123\nABC\n'
     assert file().read().splitlines()[0] == 'abc'
     assert file().readline() == 'abc\n'
+    assert file().readline().strip() == 'abc'
     assert file().readlines() == ['abc\n', '123\n', 'ABC\n']
 
 
