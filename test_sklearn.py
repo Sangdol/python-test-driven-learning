@@ -26,8 +26,10 @@ def test_dummy_classifier():
     assert_array_equal(dummy_majority.predict(X), [1, 1, 1])
 
     dummy_stratified = DummyClassifier(strategy='stratified').fit(X, y)
-    pred = dummy_stratified.predict(X)
-    assert_array_equal(np.bincount(pred), [1, 2])  # 1 zero, 2 ones
+    pred = dummy_stratified.predict(np.arange(100).reshape(-1, 1))
+    no_of_1 = np.count_nonzero(pred)
+    no_of_0 = len(pred) - no_of_1
+    assert no_of_1 > no_of_0  # cannot guarantee but most possibly this would be true
 
 
 def test_classification_report():
