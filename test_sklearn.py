@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
-from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import PolynomialFeatures
@@ -11,11 +10,30 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.metrics import classification_report
 from sklearn.dummy import DummyClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn import svm
+from sklearn.datasets import load_iris
 
 
 def assert_array_equal(arr1, arr2):
     if not np.array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
+
+
+def test_grid_search_cv():
+    iris = load_iris()
+
+    svc = svm.SVC()
+    clf = GridSearchCV(estimator=svc, param_grid={'kernel': ('linear', 'rbf'), 'C': [0.1, 10]}, cv=3)
+    clf.fit(iris.data, iris.target)
+
+    assert_array_equal(list(clf.cv_results_.keys()),
+                       ['mean_fit_time', 'std_fit_time', 'mean_score_time',
+                        'std_score_time', 'param_C', 'param_kernel', 'params',
+                        'split0_test_score', 'split1_test_score', 'split2_test_score',
+                        'mean_test_score', 'std_test_score', 'rank_test_score',
+                        'split0_train_score', 'split1_train_score', 'split2_train_score',
+                        'mean_train_score', 'std_train_score'])
 
 
 def test_dummy_classifier():
