@@ -1,9 +1,12 @@
+import pytest
+
+
 def test_difference_set():
     a = {1, 2, 3}
     b = {2, 3, 4}
 
     assert a - b == {1}
-    
+
 
 def test_intersection_of_sets():
     a = [1, 2, 3]
@@ -69,6 +72,9 @@ def test_dictionary_functions():
 def test_dictionary():
     x = {'hello': 'world'}
     assert x['hello'] == 'world'
+
+    if 'hello' not in x:
+        pytest.fail()
 
     x['hallo'] = 'welt'
     assert x['hallo'] == 'welt'
