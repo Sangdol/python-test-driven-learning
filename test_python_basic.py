@@ -1,4 +1,17 @@
 import pytest
+import numpy as np
+
+
+def assert_array_equal(arr1, arr2):
+    if not np.array_equal(arr1, arr2):
+        raise ValueError("{} is not {}".format(arr1, arr2))
+
+
+def test_divmod():
+    assert_array_equal(divmod(3, 2), (1, 1))
+    assert_array_equal(divmod(2, 2), (1, 0))
+    assert_array_equal(divmod(1, 2), (0, 1))
+    assert_array_equal(divmod(10, 2), (5, 0))
 
 
 def test_e_number():
