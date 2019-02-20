@@ -127,7 +127,9 @@ def test_pipeline_linear_regression():
     y = [2, 4, 6]
 
     model.fit(X.reshape(-1, 1), y)
-    assert model.predict([[1]]) == [2]
+    pred = model.predict([[1]])
+    
+    assert np.isclose(pred[0], 2)
 
 
 def test_min_max_scaler():
