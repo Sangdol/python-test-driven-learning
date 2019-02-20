@@ -1,3 +1,17 @@
+# https://docs.python.org/2/library/string.html#formatstrings
+def test_format():
+    n = 0.123
+
+    assert '{:.2%}'.format(n) == '12.30%'
+    assert '{:.2}'.format(n) == '0.12'
+
+
+# https://stackoverflow.com/questions/1823058/how-to-print-number-with-commas-as-thousands-separators
+def test_number_to_comma_str():
+    assert "{:,}".format(1000000.1234) == '1,000,000.1234'
+    assert "{:,}".format(1000000) == '1,000,000'
+
+
 def test_f_string():
     ten = 10
 
