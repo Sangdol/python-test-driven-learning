@@ -128,7 +128,7 @@ def test_pipeline_linear_regression():
 
     model.fit(X.reshape(-1, 1), y)
     pred = model.predict([[1]])
-    
+
     assert np.isclose(pred[0], 2)
 
 

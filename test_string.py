@@ -1,3 +1,17 @@
+def test_f_string():
+    ten = 10
+
+    assert f'ten is {ten}' == 'ten is 10'
+
+    f = 1.0
+
+    assert f'float {f}' == 'float 1.0'
+
+    s = 'str'
+
+    assert f'string {s}' == 'string str'
+
+
 # https://stackoverflow.com/questions/354038/how-do-i-check-if-a-string-is-a-number-float
 def test_is_number():
     def is_number(s):
