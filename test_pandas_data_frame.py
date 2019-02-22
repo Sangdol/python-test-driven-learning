@@ -345,11 +345,13 @@ def test_data_structure():
 
 
 def test_read_csv():
-    df = pd.read_csv('stub/test_panda.csv')
-    assert df.size == 4;
+    df = pd.read_csv('stub/test_panda.csv', thousands=',')
+    assert len(df) == 2
+    assert df.size == 6
     assert df.at[0, 'name'] == 'sang'
     assert df.loc[1].at['name'] == 'kim'
     assert df.iat[0, 1] == 36
+    assert df.loc[0, 'money'] == 10000
 
 
 def test_merge():
