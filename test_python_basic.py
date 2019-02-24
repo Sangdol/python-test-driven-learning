@@ -19,7 +19,9 @@ def test_false_value():
 
 
 def test_divmod():
-    assert_array_equal(divmod(3, 2), (1, 1))
+    assert 5 // 2 == 2
+    assert 5 % 2 == 1
+    assert_array_equal(divmod(5, 2), (2, 1))
     assert_array_equal(divmod(2, 2), (1, 0))
     assert_array_equal(divmod(1, 2), (0, 1))
     assert_array_equal(divmod(10, 2), (5, 0))
