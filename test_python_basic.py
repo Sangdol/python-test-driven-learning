@@ -7,6 +7,17 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+# https://docs.python.org/2/library/stdtypes.html#truth-value-testing
+def test_false_value():
+    assert not None
+    assert not False
+    assert not 0
+    assert not ''
+    assert not ()
+    assert not []
+    assert not {}
+
+
 def test_divmod():
     assert_array_equal(divmod(3, 2), (1, 1))
     assert_array_equal(divmod(2, 2), (1, 0))
