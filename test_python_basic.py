@@ -7,6 +7,37 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_iterable():
+    # https://wiki.python.org/moin/Iterator - in Python3 next() -> __next__()
+    class CustomIterable:
+        def __init__(self):
+            self.list = [1, 2]
+
+        def __iter__(self):
+            return self
+
+        def __next__(self):
+            if self.list:
+                return self.list.pop()
+            else:
+                raise StopIteration
+
+    it = CustomIterable()
+    s = 0
+    for i in it:
+        s += i
+
+    assert s == 3
+
+
+def test_iterator():
+    # All iterators can only be iterated over once.
+    it = iter([1, 2])
+
+    assert sum(it) == 3
+    assert sum(it) == 0
+
+
 def test_yield():
     def generator_yield():
         for i in range(5):
@@ -123,7 +154,7 @@ def test_type_checking():
 def test_raise_exception():
     try:
         raise ValueError('hello', 'world', '!')
-        self.fail()
+        pytest.fail()
     except ValueError as err:
         assert err.args == ('hello', 'world', '!')
 
