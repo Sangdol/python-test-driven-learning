@@ -7,6 +7,28 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_yield():
+    def generator_yield():
+        for i in range(5):
+            yield i
+
+    gen = generator_yield()
+
+    assert next(gen) == 0
+    assert gen.__next__() == 1
+    assert sum(gen) == 9
+    assert sum(gen) == 0
+
+    try:
+        next(gen)
+        pytest.fail()
+    except StopIteration:
+        pass
+
+    gen2 = generator_yield()
+    assert sum(gen2) == 10
+
+
 # https://docs.python.org/2/library/stdtypes.html#truth-value-testing
 def test_false_value():
     assert not None
