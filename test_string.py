@@ -1,3 +1,8 @@
+def test_bytes_to_string():
+    assert b'abc' != 'abc'
+    assert str(b'abc', 'utf-8') == 'abc'
+
+
 # https://docs.python.org/2/library/string.html#formatstrings
 def test_format():
     n = 0.123
