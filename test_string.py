@@ -1,3 +1,10 @@
+# https://stackoverflow.com/questions/1504717/why-does-comparing-strings-using-either-or-is-sometimes-produce-a-differe
+def test_equal_vs_is():
+    assert 'abc' is 'abc'
+    assert 'abc' == 'abc'
+    assert 'abc' is not ''.join(['a', 'b', 'c'])
+
+
 def test_bytes_to_string():
     assert b'abc' != 'abc'
     assert str(b'abc', 'utf-8') == 'abc'
