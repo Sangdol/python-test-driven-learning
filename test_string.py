@@ -44,6 +44,10 @@ def test_f_string():
 
     assert f'string {s}' == 'string str'
 
+    # https://stackoverflow.com/questions/45310254/fixed-digits-after-decimal-with-f-strings
+    n = 100000.1234
+    assert f'{n:,.2f}' == '100,000.12'
+
 
 # https://stackoverflow.com/questions/354038/how-do-i-check-if-a-string-is-a-number-float
 def test_is_number():
