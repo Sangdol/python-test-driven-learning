@@ -18,9 +18,17 @@ df = spark.read.format("csv").options(
     header='true', delimiter=',').load('stub/test_spark.csv')
 
 
-def test_spark():
+def test_to_pandas():
     pandas_df = df.toPandas()
     assert len(pandas_df) == 4
+
+
+# https://docs.databricks.com/spark/latest/faq/append-a-row-to-rdd-or-dataframe.html
+def test_dataframe_append():
+    X = spark.range(3).toDF('no')
+    Y = spark.range(3).toDF('no')
+
+    assert X.union(Y).count() == 6
 
 
 # You cannot add an arbitrary column to a DataFrame in Spark.
