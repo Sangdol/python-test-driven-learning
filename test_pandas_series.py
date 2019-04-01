@@ -7,6 +7,26 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_replace():
+    s = pd.Series(['abc'])
+
+    # str replace
+    assert s.str.replace('b', 'a')[0] == 'aac'
+
+    # regex is True by default
+    assert s.str.replace(r'\w+', 'a')[0] == 'a'
+
+    # replace
+    assert s.replace('abc', 'aaa')[0] == 'aaa'
+
+    # it only replaces when the given value matches exactly
+    # when no regex=True is passed.
+    assert s.replace('a', 'b')[0] == 'abc'
+
+    # it can replace types other than str
+    assert pd.Series([0]).replace(0, 1)[0] == 1
+
+
 def test_logical_not():
     assert_array_equal(-pd.Series([True, False]), [False, True])
     assert_array_equal(~pd.Series([True, False]), [False, True])
@@ -34,8 +54,7 @@ def test_groupby():
     # count - excluding missing values
     assert s.groupby(s).count().equals(
         pd.Series(data=[1, 2], index=['a', 'b']))
-    assert s.groupby(s).size().equals(
-        pd.Series(data=[1, 2], index=['a', 'b']))
+    assert s.groupby(s).size().equals(pd.Series(data=[1, 2], index=['a', 'b']))
 
     # groupby by other series
     s = pd.Series([1, 1, 2])
@@ -49,8 +68,10 @@ def test_groupby():
 def test_filter_numbers():
     s = pd.Series([1, 'a', '3', '-1.1'])
 
-    assert_array_equal(pd.to_numeric(s, errors='coerce').dropna(), [1, 3, -1.1])
-    assert_array_equal(s[pd.to_numeric(s, errors='coerce').notnull()], pd.Series([1, '3', '-1.1']))
+    assert_array_equal(
+        pd.to_numeric(s, errors='coerce').dropna(), [1, 3, -1.1])
+    assert_array_equal(s[pd.to_numeric(s, errors='coerce').notnull()],
+                       pd.Series([1, '3', '-1.1']))
 
 
 def test_values_vs_tolist():
