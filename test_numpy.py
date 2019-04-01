@@ -14,6 +14,18 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+# Two dimensions are compatible when they are equal, or one of them is 1
+# https://docs.scipy.org/doc/numpy/user/basics.broadcasting.html
+def test_broadcast():
+    d5 = np.arange(5)
+    d3 = np.arange(3)
+    d33 = np.arange(9).reshape(3, 3)
+    d511 = d5[:, np.newaxis, np.newaxis]
+
+    assert (d511 * d3).shape == (5, 1, 3)
+    assert (d511 * d33).shape == (5, 3, 3)
+
+
 # https://docs.scipy.org/doc/numpy/reference/constants.html#numpy.newaxis
 def test_newaxis():
     assert np.newaxis is None
