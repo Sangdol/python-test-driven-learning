@@ -14,6 +14,17 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+# https://docs.scipy.org/doc/numpy/reference/constants.html#numpy.newaxis
+def test_newaxis():
+    assert np.newaxis is None
+
+    x = np.arange(3)
+    assert x.shape == (3,)
+    assert x[:, np.newaxis].shape == (3, 1)
+    assert x[:, np.newaxis].shape == x.reshape(3, -1).shape
+    assert x[np.newaxis].shape == (1, 3)
+
+
 def test_argmin_argmax():
     a = [[5, 4, 3], [10, 0, 5]]
 
