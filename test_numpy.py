@@ -19,11 +19,16 @@ def assert_array_not_equal(arr1, arr2):
 def test_broadcast():
     d5 = np.arange(5)
     d3 = np.arange(3)
+    d13 = np.arange(3)[np.newaxis]
+    d31 = np.arange(3)[:, np.newaxis]
     d33 = np.arange(9).reshape(3, 3)
     d511 = d5[:, np.newaxis, np.newaxis]
 
     assert (d511 * d3).shape == (5, 1, 3)
     assert (d511 * d33).shape == (5, 3, 3)
+    assert (d13 + d3).shape == (1, 3)
+    assert (d31 + d3).shape == (3, 3)
+    assert (d31 * d3).shape == (3, 3)
 
 
 # https://docs.scipy.org/doc/numpy/reference/constants.html#numpy.newaxis
