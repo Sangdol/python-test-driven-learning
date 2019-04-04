@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from sklearn import metrics
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
@@ -18,6 +19,19 @@ from sklearn.datasets import load_iris
 def assert_array_equal(arr1, arr2):
     if not np.array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
+
+
+def test_roc_auc():
+    # roc_acu_score can be used only for binary
+    y_true = np.array([0, 0, 1, 1])
+    y_scores = np.array([0.1, 0.4, 0.35, 0.8])
+    assert metrics.roc_auc_score(y_true, y_scores) == 0.75
+
+    # with this you can set 'pos_label'
+    y = np.array([1, 1, 2, 2])
+    pred = np.array([0.1, 0.4, 0.35, 0.8])
+    fpr, tpr, thresholds = metrics.roc_curve(y, pred, pos_label=2)
+    assert metrics.auc(fpr, tpr) == 0.75
 
 
 def test_grid_search_cv():
