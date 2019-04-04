@@ -5,6 +5,13 @@ def test_equal_vs_is():
     assert 'abc' is not ''.join(['a', 'b', 'c'])
 
 
+# r = raw
+# https://docs.python.org/2/reference/lexical_analysis.html#string-literals
+def test_r_string():
+    assert r'\n' == '\\n'
+    assert r'\n' != '\n'
+
+
 def test_bytes_to_string():
     assert b'abc' != 'abc'
     assert str(b'abc', 'utf-8') == 'abc'
