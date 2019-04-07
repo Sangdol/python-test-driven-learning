@@ -14,6 +14,15 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+def test_argsort():
+    # 0 is on the 1st index so 1 is the first element, etc.
+    arr = np.array([1, 0, 3])
+    sorted_indices = [1, 0, 2]
+
+    assert_array_equal(np.argsort(arr), sorted_indices)
+    assert_array_equal(arr[sorted_indices], [0, 1, 3])
+
+
 def test_transpose():
     r = np.random.rand(2, 3)
 
