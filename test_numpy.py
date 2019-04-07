@@ -14,6 +14,29 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+def test_transpose():
+    r = np.random.rand(2, 3)
+
+    assert_array_equal(r.T, np.transpose(r))
+
+    m = np.ones((2, 3, 4))
+    assert np.transpose(m, axes=[1, 2, 0]).shape == (3, 4, 2)
+
+
+def test_split():
+    splited = np.split(np.arange(9), 3)
+
+    assert len(splited) == 3
+    assert_array_equal(splited[0], [0, 1, 2])
+
+    try:
+        splited = np.split(np.arange(8), 3)
+        pytest.fail()
+    except ValueError:
+        # ValueError: array split does not result in an equal division
+        pass
+
+
 # Two dimensions are compatible when they are equal, or one of them is 1
 # https://docs.scipy.org/doc/numpy/user/basics.broadcasting.html
 def test_broadcast():
