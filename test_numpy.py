@@ -14,6 +14,12 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+def test_argmax():
+    arr = np.array([1, 0, 3])
+
+    assert np.argmax(arr) == 2
+
+
 def test_argsort():
     # 0 is on the 1st index so 1 is the first element, etc.
     arr = np.array([1, 0, 3])
