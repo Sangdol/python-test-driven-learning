@@ -14,6 +14,9 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+def test_clip():
+    assert_array_equal(np.clip([-1, 0, 1, 2, 3], 0, 2), [0, 0, 1, 2, 2])
+
 
 # horizontal (column wise) concatenation
 def test_hstack():
