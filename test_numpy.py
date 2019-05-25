@@ -14,6 +14,13 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+
+# horizontal (column wise) concatenation
+def test_hstack():
+    assert_array_equal(np.hstack(([1, 2, 3], [4, 5])), [1, 2, 3, 4, 5])
+    assert_array_equal(np.hstack(([[1], [2]], [[3], [4]])), [[1, 3], [2, 4]])
+
+
 def test_argmax():
     arr = np.array([1, 0, 3])
 
