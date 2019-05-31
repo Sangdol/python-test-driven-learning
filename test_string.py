@@ -1,3 +1,11 @@
+from string import Template
+
+
+def test_template():
+    s = Template('$who likes $what')
+    assert s.substitute(who='Sang', what='Template') == 'Sang likes Template'
+
+
 # https://stackoverflow.com/questions/1504717/why-does-comparing-strings-using-either-or-is-sometimes-produce-a-differe
 def test_equal_vs_is():
     assert 'abc' is 'abc'
