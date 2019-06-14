@@ -3,10 +3,13 @@
 https://spark.apache.org/docs/2.2.0/api/python/pyspark.sql.html
 
 """
-from pyspark.sql import *
+from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.sql.functions import rand
 from pyspark.sql.functions import lit
+import pytest
+
+pytest.mark.skip("Skip as it makes error with testmon.")
 
 spark = SparkSession \
     .builder \
