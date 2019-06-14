@@ -5,6 +5,12 @@ import datetime as dt
 import time as tm
 
 
+# Parse a string representing a time according to a format.
+# https://docs.python.org/3/library/time.html#time.strptime
+def test_strptime():
+    assert dt.datetime.strptime('2019-06-07', '%Y-%m-%d').strftime('%m') == '06'
+
+
 def test_time_comparison():
     assert dt.datetime.now().time() >= dt.time(hour=0)
     assert dt.datetime.now().time() <= dt.time(hour=23)
