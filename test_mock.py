@@ -5,6 +5,20 @@ from unittest.mock import MagicMock
 from unittest.mock import Mock
 from unittest.mock import patch
 import pytest
+import responses
+import requests
+
+
+# https://github.com/getsentry/responses
+@responses.activate
+def test_responses():
+    url = 'https://test.com'
+    responses.add(
+        responses.POST,
+        url,
+        json={'a': 1}, status=200)
+
+    assert requests.post(url).content == b'{"a": 1}'
 
 
 def test_patch_object():

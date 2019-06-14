@@ -17,6 +17,7 @@ pytest-testmon = "*"
 matplotlib = "*"
 pyspark = "*"
 seaborn = "*"
+responses = "*"
 
 [dev-packages]
 ptpython = "*"
