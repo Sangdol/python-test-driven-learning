@@ -7,6 +7,7 @@ from unittest.mock import patch
 import pytest
 import responses
 import requests
+import re
 
 
 # https://github.com/getsentry/responses
@@ -19,6 +20,20 @@ def test_responses():
         json={'a': 1}, status=200)
 
     assert requests.post(url).content == b'{"a": 1}'
+
+
+@responses.activate
+def test_responses_url_pattern():
+    url = re.compile('https://test.com/')
+    responses.add(
+        responses.POST,
+        url,
+        json={'a': 1}, status=200)
+
+    assert requests.post(
+        'https://test.com/abc?a=1&b=2',
+        headers={'Content-Type': 'application/json; charset=UTF-8'},
+    ).content == b'{"a": 1}'
 
 
 def test_patch_object():
