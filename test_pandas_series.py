@@ -7,6 +7,13 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_isin():
+    s = pd.Series([1, 2, 2, 3, 3, 3])
+
+    assert_array_equal(s[s.isin([1, 2])].values, [1, 2, 2])
+    assert_array_equal(s[~s.isin([1, 2])].values, [3, 3, 3])
+
+
 def test_replace():
     s = pd.Series(['abc'])
 
