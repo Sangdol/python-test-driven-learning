@@ -14,6 +14,15 @@ def test_intersection_of_sets():
     assert set(a).intersection(set(b)) == {2, 3}
 
 
+# https://stackoverflow.com/questions/12876177/how-to-create-a-tuple-with-only-one-element
+def test_single_item_tuple():
+    assert (1) == 1
+    assert type((1)) == int
+
+    assert type((1,)) == tuple
+    assert type(tuple([1])) == tuple
+
+
 def test_tuple():
     t = (1, 'a', 2, 'b')
     assert len(t) == 4
