@@ -1,6 +1,11 @@
 from string import Template
 
 
+# f-string is introduced at Python 3.6
+def test_fstring():
+    assert ('%s %d' % ('a', 1)) == 'a 1'
+
+
 def test_template():
     s = Template('$who likes $what')
     assert s.substitute(who='Sang', what='Template') == 'Sang likes Template'
