@@ -4,6 +4,7 @@ from string import Template
 # f-string is introduced at Python 3.6
 def test_fstring():
     assert ('%s %d' % ('a', 1)) == 'a 1'
+    assert (('%(name)s: %(age)d') % {'name': 'sang', 'age': 36}) == 'sang: 36'
 
 
 def test_template():
