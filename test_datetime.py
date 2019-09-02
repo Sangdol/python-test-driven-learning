@@ -5,6 +5,23 @@ import datetime as dt
 import time as tm
 
 
+def test_add_str_day():
+    def add_days(date, days):
+        """
+        Take a string date and add the days to it,
+        and returns the date string.
+        """
+
+        datetime = dt.datetime.strptime(date, '%Y-%m-%d')
+        added = datetime + dt.timedelta(days=days)
+        return added.strftime('%Y-%m-%d')
+
+    assert add_days('2019-08-30', 1) == '2019-08-31'
+    assert add_days('2019-08-30', 2) == '2019-09-01'
+    assert add_days('2019-08-30', 0) == '2019-08-30'
+    assert add_days('2019-08-30', 10) == '2019-09-09'
+
+
 # Parse a string representing a time according to a format.
 # https://docs.python.org/3/library/time.html#time.strptime
 def test_strptime():
@@ -37,7 +54,7 @@ def test_datetime_format():
     assert d.isoformat(' ') == '2007-12-06 15:29:43.079060'
 
 
-def test_datetime():
+def test_timedelta():
     assert tm.time() > 0  # epoch in float e.g., 1544707185.613296
 
     dtnow = dt.datetime.fromtimestamp(tm.time(), dt.timezone.utc)
