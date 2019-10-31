@@ -44,3 +44,14 @@ def test_exception():
         assert '{}'.format(e) == 'division by zero'
         assert type(e).__module__ == 'builtins'
         assert type(e).__name__ == 'ZeroDivisionError'
+
+
+def test_else():
+    try:
+        msg = 'hello'
+    except IOError:
+        msg = 'not this'
+    else:
+        msg = 'else'
+
+    assert msg == 'else'
