@@ -6,6 +6,13 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_random_choice():
+    assert len(np.random.choice(3, 2)) == 2
+    # replace=True allows duplicate
+    # https://stackoverflow.com/questions/40689152/what-does-replacement-mean-in-numpy-random-choice
+    assert len(np.random.choice(3, 2, replace=True)) == 2
+
+
 # rand between a and b
 # p(x) = 1 / (b - a)
 def test_random_uniform():
