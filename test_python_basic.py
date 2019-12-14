@@ -7,6 +7,17 @@ def assert_array_equal(arr1, arr2):
         raise ValueError("{} is not {}".format(arr1, arr2))
 
 
+def test_iterable_unpacking():
+    head, *body, tail = range(5)
+    assert head == 0
+    assert body == [1, 2, 3]
+    assert tail == 4
+
+    first, _, third, *_ = range(10)
+    assert first == 0
+    assert third == 2
+
+
 def test_iterable():
     # https://wiki.python.org/moin/Iterator - in Python3 next() -> __next__()
     class CustomIterable:
