@@ -1,5 +1,6 @@
 from fractions import Fraction
 import pytest
+import math
 
 
 # https://docs.python.org/3/library/fractions.html
@@ -26,3 +27,12 @@ def test_division():
 
     # No exception occurs here.
     2**3000 // 10
+
+
+def test_combination_formula():
+    def nCr(n, r):
+        f = math.factorial
+        return f(n) // f(n - r) // f(r)
+
+    assert nCr(3, 2) == 3
+    assert nCr(4, 2) == 6
