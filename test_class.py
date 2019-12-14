@@ -2,6 +2,28 @@
 https://docs.python.org/3/tutorial/classes.html
 """
 
+from dataclasses import dataclass
+
+
+# https://docs.python.org/3/library/dataclasses.html
+def test_dataclass():
+    @dataclass
+    class Person:
+        name: str
+        age: int
+        alive: bool = True
+
+        def hello(self) -> str:
+            return 'world'
+
+    p = Person('Sang', 36)
+    assert p.name == 'Sang'
+    assert p.age == 36
+    assert p.alive
+    assert p.__repr__() == "test_dataclass.<locals>.Person(name='Sang', age=36, alive=True)"
+    assert p.__str__() == "test_dataclass.<locals>.Person(name='Sang', age=36, alive=True)"
+    assert p.hello() == 'world'
+
 
 def test_empty_class():
     class Employee:
@@ -15,7 +37,7 @@ def test_empty_class():
 
     assert john.name == 'john'
     assert john.__dict__ == {'dept': 'computer lab', 'name': 'john', 'salary': 1}
-    
+
 
 def test_self():
     class Person:
