@@ -5,6 +5,43 @@ https://docs.python.org/3/tutorial/classes.html
 from dataclasses import dataclass
 
 
+# https://stackoverflow.com/questions/12179271/meaning-of-classmethod-and-staticmethod-for-beginner
+def test_staticmethod_and_classmethod():
+    class Person():
+        def __init__(self, age, name):
+            self.age = age
+            self.name = name
+
+        @classmethod
+        def baby(cls, name):
+            return cls(0, name)
+
+        @staticmethod
+        def adult(name):
+            return Person(20, name)
+
+        def info(self):
+            return f'{self.age}, {self.name}'
+
+    baby = Person.baby('Miyu')
+    adult = Person.adult('Sang')
+
+    assert isinstance(baby, Person)
+    assert isinstance(adult, Person)
+    assert baby.info() == '0, Miyu'
+
+    class Engineer(Person):
+        def info(self):
+            return f'Engineer: {self.age}, {self.name}'
+
+    engineer_baby = Engineer.baby('Miyu')
+    engineer_adult = Engineer.adult('Sang')
+
+    assert engineer_baby.info() == 'Engineer: 0, Miyu'
+    # This would be undesirable so @classmethod should have been used.
+    assert engineer_adult.info() == '20, Sang'
+
+
 # https://docs.python.org/3/library/dataclasses.html
 def test_dataclass():
     @dataclass
