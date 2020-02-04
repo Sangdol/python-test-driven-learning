@@ -1,16 +1,7 @@
-import unittest
+def test_map():
+    names = ['sanghyun lee', 'hyunji kim']
 
+    def lastname(name):
+        return name.split(' ')[1]
 
-class BuiltinFunctionsTest(unittest.TestCase):
-
-    def test_map(self):
-        names = ['sanghyun lee', 'hyunji kim']
-
-        def lastname(name):
-            return name.split(' ')[1]
-
-        self.assertEqual(list(map(lastname, names)), ['lee', 'kim'])
-
-
-if __name__ == '__main__':
-    unittest.main()
+    assert list(map(lastname, names)) == ['lee', 'kim']
