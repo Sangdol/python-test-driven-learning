@@ -1,5 +1,35 @@
 import pytest
 from heapq import heappush, heappop, heappushpop, heapreplace
+from collections import deque
+
+def test_deque():
+    """
+    deque (pronoune "deck") is good at pop(0) (leftpop()) but worse at random access compared to list.
+    https://docs.python.org/3/library/collections.html#collections.deque
+    https://stackoverflow.com/questions/6256983/how-are-deques-in-python-implemented-and-when-are-they-worse-than-lists
+    https://stackoverflow.com/questions/39522787/time-complexity-of-random-access-in-deque-in-python
+    """
+
+    d = deque('abcd')
+
+    assert d[0] == 'a'
+    assert d.popleft() == 'a'
+    assert len(d) == 3
+
+    d.extend('efg')
+    assert len(d) == 6
+    assert d.pop() == 'g'
+
+    d.appendleft('a')
+    assert d[0] == 'a'
+
+    d.append('g')
+    assert d[-1] == 'g'
+
+    d.extendleft('h')
+    d.rotate(-1)
+    assert d[0] == 'a'
+    assert d[-1] == 'h'
 
 
 # https://docs.python.org/3/library/heapq.html
