@@ -5,6 +5,37 @@ https://docs.python.org/3/tutorial/classes.html
 from dataclasses import dataclass
 
 
+def test_class_attributes():
+    class MyClass:
+        i = 10
+
+    m1 = MyClass()
+    m2 = MyClass()
+
+    assert MyClass.i == 10
+    assert m1.i == 10
+    assert m2.i == 10
+    assert m1.__class__.i == 10
+
+    MyClass.i = 20
+    m3 = MyClass()
+
+    assert MyClass.i == 20
+    assert m3.i == 20
+
+    # as 'i' is part of MyClass it's changed.
+    assert m1.i == 20
+    assert 'i' not in m1.__dict__
+
+    # not 'i' is an attribute of m1
+    m1.i = 10
+    assert 'i' in m1.__dict__
+    assert m1.i == 10
+
+    MyClass.i = 30
+    assert m1.i == 10
+
+
 # https://stackoverflow.com/questions/12179271/meaning-of-classmethod-and-staticmethod-for-beginner
 def test_staticmethod_and_classmethod():
     class Person():
