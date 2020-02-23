@@ -32,3 +32,13 @@ def test_non_local():
 
     with_nonlocal()
     assert local_var == 2
+
+
+def test_for_var():
+    a = [1, 2, 3]
+
+    for i, n in enumerate(a):
+        pass
+
+    assert i == 2   # interesting. it's not 3.
+    assert n == 3
