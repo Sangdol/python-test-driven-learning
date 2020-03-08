@@ -1,6 +1,25 @@
 from string import Template
 
 
+def test_octet_sequence_format():
+    """
+    https://stackoverflow.com/questions/16926130/convert-to-binary-and-keep-leading-zeros-in-python
+    """
+    assert format(4, '6') == '     4'   # width
+    assert format(4, '06') == '000004'  # zero padding
+    assert format(4, '06b') == '000100'  # binary with zero padding
+    assert format(4, '#06b') == '0b0100'  # binary with zero padding and 0b
+
+    assert '{:6}'.format(4) == '     4'
+    assert '{:06}'.format(4) == '000004'
+    assert '{:06b}'.format(4) == '000100'
+    assert '{:#06b}'.format(4) == '0b0100'
+
+    a = 4
+    assert f'{a:6}' == '     4'
+    assert f'{a:06}' == '000004'
+
+
 # f-string is introduced at Python 3.6
 def test_fstring():
     assert ('%s %d' % ('a', 1)) == 'a 1'
