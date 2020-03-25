@@ -1,6 +1,7 @@
 import pytest
-from heapq import heappush, heappop, heappushpop, heapreplace
+from heapq import heappush, heappop, heappushpop, heapreplace, heapify
 from collections import deque
+
 
 def test_deque():
     """
@@ -58,17 +59,48 @@ def test_heapq():
     assert h == [-1, 3]
 
 
+def test_heapq_tuples():
+    """
+    heap APIs will use the first element of tuples for sorting.
+    https://stackoverflow.com/questions/3954530/how-to-make-heapq-evaluate-the-heap-off-of-a-specific-attribute
+    """
+    h = [(1, 'a'), (2, 'b'), (3, 'c')]
+    heapify(h)
+
+    assert heappop(h) == (1, 'a')
+    assert heappop(h) == (2, 'b')
+
+
 def test_difference_set():
     a = {1, 2, 3}
     b = {2, 3, 4}
 
+    assert a.difference(b) == {1}
     assert a - b == {1}
 
 
 def test_intersection_of_sets():
-    a = [1, 2, 3]
-    b = [2, 3, 4]
-    assert set(a).intersection(set(b)) == {2, 3}
+    a = {1, 2, 3}
+    b = {2, 3, 4}
+
+    assert a.intersection(b) == {2, 3}
+    assert a & b == {2, 3}
+
+
+def test_union_of_sets():
+    a = {1, 2, 3}
+    b = {2, 3, 4}
+
+    assert a.union(b) == {1, 2, 3, 4}
+    assert a | b == {1, 2, 3, 4}
+
+
+def test_symmetric_difference_of_sets():
+    a = {1, 2}
+    b = {2, 3}
+
+    assert a.symmetric_difference(b) == {1, 3}
+    assert a ^ b == {1, 3}
 
 
 # https://stackoverflow.com/questions/12876177/how-to-create-a-tuple-with-only-one-element
