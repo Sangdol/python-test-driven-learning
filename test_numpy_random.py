@@ -36,3 +36,11 @@ def test_random_seed():
 # standard normal distribution
 def test_randn():
     assert_array_equal(np.random.randn(2, 3, 4).shape, (2, 3, 4))
+
+
+def test_randint():
+    ints = np.random.randint(low=10, high=20, size=(2, 3))
+
+    assert len(ints) == 2
+    assert len(ints[0]) == 3
+    assert 10 <= ints[0][0] < 20
