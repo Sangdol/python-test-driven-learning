@@ -238,7 +238,7 @@ def test_shape():
 
 
 def test_array_comparison():
-    assert_array_not_equal(np.array(1, dtype=object), [1])  # dtype matters
+    assert_array_equal(np.array([1], dtype=object), [1])  # dtype matters
     assert_array_equal(np.array([1]), [1])
     assert_array_equal(np.array([1], dtype=int), [1])
 
