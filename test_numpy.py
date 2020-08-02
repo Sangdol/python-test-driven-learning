@@ -14,6 +14,32 @@ def assert_array_not_equal(arr1, arr2):
         raise ValueError("{} is {}".format(arr1, arr2))
 
 
+def test_indexing():
+    names = np.array(['a', 'b', 'a'])
+    arr = np.array([
+        [1],
+        [2],
+        [3]
+    ])
+
+    assert_array_equal(names == 'a', [True, False, True])
+    assert_array_equal(arr[names == 'a'], [[1], [3]])
+    assert_array_equal(arr[~(names == 'a')], [[2]])
+
+
+def test_slicing():
+    np_arr = np.arange(5)
+    part = np_arr[0:2]
+    part[0] = 100
+
+    # slices are views on the original array
+    assert np_arr[0] == 100
+
+    # "bare" slice
+    part[:] = 10
+    assert_array_equal(np_arr, [10, 10, 2, 3, 4])
+
+
 def test_full():
     tens = np.full((2, 3), 10)
 
