@@ -249,6 +249,13 @@ def test_date_comparison():
     assert np.datetime64('2018-01-01') == np.datetime64('2018-01-01')
 
 
+def test_astype():
+    arr = np.arange(3)
+
+    assert arr.dtype == np.int64
+    assert arr is not arr.astype(np.int32)
+
+
 # https://stackoverflow.com/questions/41550746/error-using-astype-when-nan-exists-in-a-dataframe
 def test_nan_type():
     assert type(np.nan).__name__ == 'float'
