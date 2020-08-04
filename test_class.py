@@ -82,7 +82,7 @@ def test_dataclass():
         alive: bool = True
 
         def hello(self) -> str:
-            return 'world'
+            return 'Hello ' + self.name
 
     p = Person('Sang', 36)
     assert p.name == 'Sang'
@@ -90,7 +90,7 @@ def test_dataclass():
     assert p.alive
     assert p.__repr__() == "test_dataclass.<locals>.Person(name='Sang', age=36, alive=True)"
     assert p.__str__() == "test_dataclass.<locals>.Person(name='Sang', age=36, alive=True)"
-    assert p.hello() == 'world'
+    assert p.hello() == 'Hello Sang'
 
 
 def test_empty_class():
