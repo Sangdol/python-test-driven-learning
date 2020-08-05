@@ -26,6 +26,8 @@ def test_indexing():
     assert_array_equal(arr[names == 'a'], [[1], [3]])
     assert_array_equal(arr[~(names == 'a')], [[2]])
 
+    assert_array_equal(arr[(names == 'a') | (names == 'b')], [[1], [2], [3]])
+
 
 def test_slicing():
     np_arr = np.arange(5)
