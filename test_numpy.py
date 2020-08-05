@@ -29,6 +29,30 @@ def test_indexing():
     assert_array_equal(arr[(names == 'a') | (names == 'b')], [[1], [2], [3]])
 
 
+def test_fancy_indexing():
+    '''fancy indexing copies unlike normal indexing'''
+    arr = np.empty((8, 4))
+
+    # 0000
+    # 1111
+    # 2222
+    # ...
+    for i in range(8):
+        arr[i] = i
+
+    assert_array_equal(arr[[3, 2]], [
+        [3, 3, 3, 3],
+        [2, 2, 2, 2]])
+
+    # 0123
+    # 4567
+    # 89(10)...
+    # ...
+    arr = np.arange(32).reshape(8, 4)
+
+    assert_array_equal(arr[[0, 2], [3, 2]], [3, 10])
+
+
 def test_slicing():
     np_arr = np.arange(5)
     part = np_arr[0:2]
