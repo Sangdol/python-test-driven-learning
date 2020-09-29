@@ -9,7 +9,7 @@ def test_max():
 
     assert max(d, key=d.get) == 'b'
 
-    d = {
+    d2 = {
         'a': {
             'aa': 1
         },
@@ -18,7 +18,7 @@ def test_max():
         }
     }
 
-    assert max(d, key=lambda key: d[key]['aa']) == 'b'
+    assert max(d2, key=lambda key: d2[key]['aa']) == 'b'
 
 
 def test_map():
