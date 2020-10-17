@@ -1,6 +1,24 @@
 import pandas as pd
 import numpy as np
 
+"""
+Indexing options with DataFrame
+
+Type							Notes
+-------------------------------------------------------
+df[val]							Select single column or sequence of columns from the DataFrame; special case conveniences: boolean array (filter rows), slice (slice rows), or boolean DataFrame (set values based on some criterion)
+df.loc[val]						Selects single row or subset of rows from the DataFrame by label
+df.loc[:, val]					Selects single column or subset of columns by label
+df.loc[val1, val2]				Select both rows and columns by label
+df.iloc[where]					Selects single row or subset of rows from the DataFrame by integer position
+df.iloc[:, where]				Selects single column or subset of columns by integer position
+df.iloc[where_i, where_j]		Select both rows and columns by integer position
+df.at[label_i, label_j]			Select a single scalar value by row and column label
+df.iat[i, j]					Select a single scalar value by row and column position (integers)
+reindex method					Select either rows or columns by labels
+get_value, set_value methods	Select single value by row and column label
+"""
+
 
 def assert_array_equal(arr1, arr2):
     if not np.array_equal(arr1, arr2):
