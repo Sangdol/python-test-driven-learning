@@ -6,7 +6,9 @@ Indexing options with DataFrame
 
 Type							Notes
 -------------------------------------------------------
-df[val]							Select single column or sequence of columns from the DataFrame; special case conveniences: boolean array (filter rows), slice (slice rows), or boolean DataFrame (set values based on some criterion)
+df[val]							Select single column or sequence of columns from the DataFrame;
+                                special case conveniences: boolean array (filter rows), slice (slice rows),
+                                or boolean DataFrame (set values based on some criterion)
 df.loc[val]						Selects single row or subset of rows from the DataFrame by label
 df.loc[:, val]					Selects single column or subset of columns by label
 df.loc[val1, val2]				Select both rows and columns by label
