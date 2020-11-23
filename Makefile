@@ -1,5 +1,5 @@
 test:
 	pipenv run pytest
 
-watch:
+test-watch:
 	pipenv run ptw -- --disable-warnings --testmon
