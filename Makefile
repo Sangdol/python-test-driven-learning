@@ -1,5 +1,9 @@
-test:
-	pipenv run pytest
+type-test:
+	mypy test_type.py --check-untyped-defs
 
-test-watch:
-	pipenv run ptw -- --disable-warnings --testmon
+test:
+	poetry run pytest
+
+# Todo
+#test-watch:
+	#poetry run ptw -- --disable-warnings --testmon
