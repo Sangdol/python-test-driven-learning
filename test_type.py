@@ -2,15 +2,17 @@
 Some code is from the book Robust Python.
 """
 from dataclasses import dataclass
-from typing import TypeVar, List, Optional, Union, Literal, Set, Tuple
+from typing import TypeVar, List, Optional, Union, Literal, Set, Tuple, Final
 
 
 def test_type_var():
-    X = TypeVar('X')
+    T = TypeVar('T')
 
-    # TODO add more explanation
-    def generic(l: List[X]) -> List[X]:
+    # Generics - T has to be the same type.
+    def half(l: List[T]) -> List[T]:
         return l[:len(l) // 2]
+
+    assert half([1, 2]) == [1]
 
 
 def test_optional():
@@ -62,3 +64,9 @@ def test_func():
         return 'a', 1
 
     assert tuple() == ('a', 1)
+
+
+def test_final():
+    NAME: Final = 'Sang'
+
+    assert NAME == 'Sang'
