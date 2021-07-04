@@ -5,6 +5,19 @@ from dataclasses import dataclass
 from typing import TypeVar, List, Optional, Union, Literal, Set, Tuple, Final
 
 
+def test_method():
+    def simple(i: int, j: int = 0) -> int:
+        return i + j
+
+    assert simple(1) == 1
+    assert simple(10, 1) == 11
+
+    def lst(i: int, j: int) -> List[int]:
+        return [i, j]
+
+    assert lst(1, 2) == [1, 2]
+
+
 def test_type_var():
     T = TypeVar('T')
 
