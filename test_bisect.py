@@ -26,6 +26,11 @@ def test_bisect_right():
     assert bisect([10, 20, 30], 30) == 3
 
 
+def test_bisect_list():
+    assert [1, 'b'] > [1]
+    assert(bisect([[0, 'a'], [1, 'b'], [2, 'c']], [1])) == 1
+
+
 def test_insort_left():
     """Insert x in a in sorted order.
 
