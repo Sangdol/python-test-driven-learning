@@ -1,4 +1,4 @@
-from collections import Counter, deque
+from collections import Counter, deque, OrderedDict
 
 
 def test_deque():
@@ -58,4 +58,25 @@ def test_counter():
     assert list(c3.elements()) == ['a', 'a', 'a']
 
 
+def test_ordered_dict():
+    # LIFO / Stack
 
+    d = OrderedDict.fromkeys('abc')
+    assert list(d.items()) == [('a', None), ('b', None), ('c', None)]
+
+    d.move_to_end('b')
+    assert list(d.items()) == [('a', None), ('c', None), ('b', None)]
+
+    e = d.popitem()
+    assert e == ('b', None)
+
+    d['d'] = None
+    assert list(d.items()) == [('a', None), ('c', None), ('d', None)]
+
+    e = d.popitem()
+    assert e == ('d', None)
+
+    # FIFO / Queue
+
+    e = d.popitem(last=False)
+    assert e == ('a', None)
