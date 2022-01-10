@@ -25,3 +25,10 @@ def test_assert_array_equal():
 @pytest.mark.skip(reason="No need to test.")
 def test_skip():
     pass
+
+
+# https://docs.pytest.org/en/6.2.x/parametrize.html
+@pytest.mark.parametrize("test_input, expected",
+                         [([], [])])
+def test(test_input, expected):
+    assert test_input == expected
