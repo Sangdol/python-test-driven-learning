@@ -32,3 +32,15 @@ def test_skip():
                          [([], [])])
 def test(test_input, expected):
     assert test_input == expected
+
+
+# https://stackoverflow.com/questions/23337471/how-to-properly-assert-that-an-exception-gets-raised-in-pytest
+def test_fails():
+    with pytest.raises(Exception):
+        _ = 1 / 0
+
+
+@pytest.mark.xfail(raises=ZeroDivisionError)
+def test_fails_with_annotation():
+    _ = 1 / 0
+
