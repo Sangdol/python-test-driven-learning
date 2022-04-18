@@ -1,4 +1,4 @@
-from collections import Counter, deque, OrderedDict
+from collections import Counter, deque, OrderedDict, defaultdict
 
 
 def test_deque():
@@ -56,6 +56,16 @@ def test_counter():
     c3.update('aa')
     assert c3['a'] == 3
     assert list(c3.elements()) == ['a', 'a', 'a']
+
+
+# https://docs.python.org/3/library/collections.html#collections.defaultdict
+def test_defaultdict():
+    d = defaultdict(list)
+    d['a'].append(1)
+    assert d['a'] == [1]
+
+    d['a'].append(2)
+    assert d['a'] == [1, 2]
 
 
 def test_ordered_dict():
