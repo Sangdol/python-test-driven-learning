@@ -81,6 +81,16 @@ def test_defaultdict():
     assert d['a'] == [1, 2]
 
 
+def test_nested_defaultdict():
+    d = defaultdict(lambda: defaultdict(list))
+
+    d['a']['b'].append(1)
+    assert d['a']['b'] == [1]
+
+    d['a']['b'].append(2)
+    assert d['a']['b'] == [1, 2]
+
+
 #
 # https://docs.python.org/3/library/collections.html#collections.OrderedDict
 #
