@@ -54,12 +54,19 @@ def test_dictionary_functions():
     assert x.get('hi', 'default') == 'default'
 
 
-def test_sort():
+def test_sort_keys():
     d = {'a': 3, 'b': 2, 'c': 1}
 
     assert sorted(d) == ['a', 'b', 'c']
     assert sorted(d, key=lambda x: d[x]) == ['c', 'b', 'a']
     assert sorted(d, key=lambda x: d[x], reverse=True) == ['a', 'b', 'c']
+
+
+def test_sort_dict():
+    d = {'a': 3, 'b': 2, 'c': 1}
+
+    dict(sorted(d.items())) == {'a': 3, 'b': 2, 'c': 1}
+    dict(sorted(d.items(), key=lambda item: item[1])) == {'a': 3, 'b': 2, 'c': 1}
 
 
 #
