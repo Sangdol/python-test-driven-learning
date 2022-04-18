@@ -54,6 +54,14 @@ def test_dictionary_functions():
     assert x.get('hi', 'default') == 'default'
 
 
+def test_sort():
+    d = {'a': 3, 'b': 2, 'c': 1}
+
+    assert sorted(d) == ['a', 'b', 'c']
+    assert sorted(d, key=lambda x: d[x]) == ['c', 'b', 'a']
+    assert sorted(d, key=lambda x: d[x], reverse=True) == ['a', 'b', 'c']
+
+
 #
 # https://docs.python.org/3/library/collections.html#collections.defaultdict
 #
