@@ -36,3 +36,18 @@ def test_combination_formula():
 
     assert nCr(3, 2) == 3
     assert nCr(4, 2) == 6
+
+
+def test_divmod():
+    assert 5 // 2 == 2
+    assert 5 % 2 == 1
+    assert divmod(5, 2) == (2, 1)
+    assert divmod(2, 2) == (1, 0)
+    assert divmod(1, 2) == (0, 1)
+    assert divmod(10, 2) == (5, 0)
+
+
+def test_e_number():
+    assert 1e3 == 1000
+    assert 1e-3 == 0.001
+    assert 1.1e3 == 1100
