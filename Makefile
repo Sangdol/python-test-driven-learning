@@ -1,9 +1,6 @@
-type-test:
-	mypy test_type.py --check-untyped-defs
-
 test:
-	poetry run pytest
+	poetry run pytest tests/*.py
 
-# Todo
-#test-watch:
-	#poetry run ptw -- --disable-warnings --testmon
+# If testmon doesn't work, try deleting the .testmondata directory.
+test-watch:
+	poetry run ptw tests/*.py -- --disable-warnings --testmon -v -s
