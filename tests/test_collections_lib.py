@@ -58,7 +58,9 @@ def test_counter():
     assert list(c3.elements()) == ['a', 'a', 'a']
 
 
+#
 # https://docs.python.org/3/library/collections.html#collections.defaultdict
+#
 def test_defaultdict():
     d = defaultdict(list)
     d['a'].append(1)
@@ -68,6 +70,12 @@ def test_defaultdict():
     assert d['a'] == [1, 2]
 
 
+#
+# https://docs.python.org/3/library/collections.html#collections.OrderedDict
+#
+# The insert-order is preserved in dict from Python 3.7
+# so OrderedDict is less needed but there's some additional features
+# https://stackoverflow.com/questions/50872498/will-ordereddict-become-redundant-in-python-3-7
 def test_ordered_dict():
     # LIFO / Stack
 
