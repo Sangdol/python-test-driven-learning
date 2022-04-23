@@ -20,6 +20,7 @@ matplotlib = "*"
 pyspark = "*"
 seaborn = "*"
 responses = "*"
+Flask = "^2.1.1"
 
 [tool.poetry.dev-dependencies]
 ptpython = "*"
