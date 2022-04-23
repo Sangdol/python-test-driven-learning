@@ -44,3 +44,19 @@ def test_fails():
 def test_fails_with_annotation():
     _ = 1 / 0
 
+
+# Fixture tests
+# https://docs.pytest.org/en/latest/fixture.html
+@pytest.fixture
+def fruit_list():
+    return ["apple", "banana", "orange"]
+
+
+def test_fruit_list1(fruit_list):
+    fruit_list.append("grape")
+    assert fruit_list == ["apple", "banana", "orange", "grape"]
+
+
+def test_fruit_list2(fruit_list):
+    fruit_list.append("mango")
+    assert fruit_list == ["apple", "banana", "orange", "mango"]
