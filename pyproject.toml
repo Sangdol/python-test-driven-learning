@@ -21,6 +21,7 @@ pyspark = "*"
 seaborn = "*"
 responses = "*"
 Flask = "^2.1.1"
+litequeue = "^0.5"
 
 [tool.poetry.dev-dependencies]
 ptpython = "*"

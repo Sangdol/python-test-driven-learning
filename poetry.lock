@@ -400,6 +400,14 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "litequeue"
+version = "0.5"
+description = "Simple queue built on top of SQLite"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "markupsafe"
 version = "2.1.1"
 description = "Safely add untrusted strings to HTML/XML markup."
@@ -1013,7 +1021,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "62579898becd50fbc93097c2c9ccac1452deb03803128773ae52267c340da00b"
+content-hash = "61ff7ba52ee1f3852136968faadddef658ede32b59a80fda1bee0d327517639b"
 
 [metadata.files]
 appdirs = [
@@ -1290,6 +1298,10 @@ kiwisolver = [
     {file = "kiwisolver-1.4.2-pp37-pypy37_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:0e8afdf533b613122e4bbaf3c1e42c2a5e9e2d1dd3a0a017749a7658757cb377"},
     {file = "kiwisolver-1.4.2-pp37-pypy37_pp73-win_amd64.whl", hash = "sha256:42f6ef9b640deb6f7d438e0a371aedd8bef6ddfde30683491b2e6f568b4e884e"},
     {file = "kiwisolver-1.4.2.tar.gz", hash = "sha256:7f606d91b8a8816be476513a77fd30abe66227039bd6f8b406c348cb0247dcc9"},
+]
+litequeue = [
+    {file = "litequeue-0.5-py3-none-any.whl", hash = "sha256:5f1efd8400a040058bc2c71535154f5a7af90b94cdeaa165e2db719b7144c30e"},
+    {file = "litequeue-0.5.tar.gz", hash = "sha256:959570f0bf5e6b2fba6a90bc61becb8bfcb64545adbb895646d1a94cde134151"},
 ]
 markupsafe = [
     {file = "MarkupSafe-2.1.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:86b1f75c4e7c2ac2ccdaec2b9022845dbb81880ca318bb7a0a01fbf7813e3812"},
