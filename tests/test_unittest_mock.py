@@ -33,6 +33,27 @@ def test_mock_methods():
     assert mock.test() == 'hello'
 
 
+def test_mock_assert_called():
+    """
+    https://docs.python.org/3/library/unittest.mock.html#unittest.mock.Mock.assert_called
+    """
+    mock = Mock()
+    mock.method()
+    mock.method.assert_called()
+    mock.method.assert_called_once()
+
+    mock = Mock()
+    mock.method(1, 2, 3, test='test')
+    mock.method.assert_called_with(1, 2, 3, test='test')
+    mock.method.assert_called_once_with(1, 2, 3, test='test')
+
+    mock = Mock()
+    mock.method(1, 2, 3, test='test')
+    mock.method(100)
+    mock.method.assert_any_call(1, 2, 3, test='test')
+    mock.method.assert_any_call(100)
+
+
 def test_magic_mock():
     """MagicMock is a subclass of Mock with all the magic methods pre-created.
 
