@@ -1,4 +1,4 @@
-from urllib.parse import urlparse
+from urllib.parse import urlparse, quote
 
 
 def test_urlparse():
@@ -9,3 +9,14 @@ def test_urlparse():
     assert o.path == '/path/to/something'
     assert o.query == 'hello=world'
     assert o.fragment == 'fragment'
+
+
+def test_quote():
+    """Similar to encodeURIComponent in JS.
+    https://docs.python.org/3/library/urllib.parse.html#url-quoting
+    """
+    # safe='/' by default
+    assert quote('/') == '/'
+    assert quote('/', safe='') == '%2F'
+    assert quote('#') == '%23'
+    assert quote(':') == '%3A'
