@@ -4,58 +4,8 @@ https://docs.python.org/3/library/unittest.mock.html#module-unittest.mock
 from unittest.mock import MagicMock
 from unittest.mock import Mock
 from unittest.mock import patch
+
 import pytest
-import responses
-import requests
-import re
-
-
-# https://github.com/getsentry/responses
-@responses.activate
-def test_responses():
-    url = 'https://test.com'
-    responses.add(
-        responses.POST,
-        url,
-        json={'a': 1}, status=200)
-
-    assert requests.post(url).content == b'{"a": 1}'
-
-
-@responses.activate
-def test_multiple_responses():
-    url = 'https://test.com'
-    responses.add(
-        responses.POST,
-        url,
-        json={'a': 1}, status=200)
-    responses.add(
-        responses.POST,
-        url,
-        json={'a': 1}, status=200)
-    responses.add(
-        responses.POST,
-        url,
-        json={'a': 2}, status=200)
-
-    assert requests.post(url).content == b'{"a": 1}'
-    assert requests.post(url).content == b'{"a": 1}'
-    assert requests.post(url).content == b'{"a": 2}'
-    assert requests.post(url).content == b'{"a": 2}'
-
-
-@responses.activate
-def test_responses_url_pattern():
-    url = re.compile('https://test.com/')
-    responses.add(
-        responses.POST,
-        url,
-        json={'a': 1}, status=200)
-
-    assert requests.post(
-        'https://test.com/abc?a=1&b=2',
-        headers={'Content-Type': 'application/json; charset=UTF-8'},
-    ).content == b'{"a": 1}'
 
 
 def test_patch_object():
@@ -96,7 +46,7 @@ class PatchTest:
     pass
 
 
-@patch('test_mock.PatchTest')
+@patch('test_unittest_mock.PatchTest')
 def test_patch_decorator(patch_test_class):
     assert patch_test_class is PatchTest
 
