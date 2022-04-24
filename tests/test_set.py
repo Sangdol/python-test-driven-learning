@@ -28,3 +28,12 @@ def test_symmetric_difference_of_sets():
 
     assert a.symmetric_difference(b) == {1, 3}
     assert a ^ b == {1, 3}
+
+
+def test_contains_set():
+    a = {1, 2, 3}
+    b = {2, 3}
+
+    assert a >= b
+    assert not a <= b
+
