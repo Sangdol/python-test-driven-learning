@@ -152,3 +152,12 @@ def test_counter():
     assert list(c3.elements()) == ['a', 'a', 'a']
 
 
+def test_contains_other_dict():
+    """
+    https://stackoverflow.com/questions/9323749/how-to-check-if-one-dictionary-is-a-subset-of-another-larger-dictionary
+    """
+    d1 = {'a': 1, 'b': 2}
+    d2 = {'a': 1, 'b': 2, 'c': 3}
+
+    assert d1.items() <= d2.items()
+    assert all(item in d2.items() for item in d1.items())
