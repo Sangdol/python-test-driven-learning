@@ -115,12 +115,12 @@ def test_self():
             return self
 
     p = Person()
-    assert type(p.hi()).__module__ == 'test_class'
+    assert type(p.hi()).__module__ == 'tests.test_class'
     assert type(p.hi()).__name__ == 'Person'
-    assert p.__class__.__module__ == 'test_class'
+    assert p.__class__.__module__ == 'tests.test_class'
     assert p.__class__.__name__ == 'Person'
     assert p.hi().__class__.__name__ == 'Person'
-    assert p.hi().__module__ == 'test_class'
+    assert p.hi().__module__ == 'tests.test_class'
 
 
 def test_instance_variables():
