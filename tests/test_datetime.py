@@ -5,6 +5,13 @@ import datetime as dt
 import time as tm
 
 
+def test_epoch_to_datetime():
+    epoch = 1651002158
+    datetime = dt.datetime.fromtimestamp(epoch, dt.timezone.utc)
+    print(datetime.isoformat())
+    assert datetime.isoformat() == '2022-04-26T19:42:38+00:00'
+
+
 def test_add_str_day():
     def add_days(date, days):
         """
