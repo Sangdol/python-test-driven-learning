@@ -91,13 +91,6 @@ def test_values_vs_tolist():
     assert type(s.tolist()).__name__ == 'list'
 
 
-def test_series_category():
-    s = pd.Series(['A', 'B', 'C'], index=['A', 'B', 'C']).astype(
-        'category', categories=['C', 'B', 'A'], ordered=True)
-
-    assert len(s[s > 'B']) == 1
-
-
 def test_series_dtype():
     assert str(pd.Series([1]).dtype) == 'int64'
     assert str(pd.Series([1, None]).dtype) == 'float64'

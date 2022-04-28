@@ -276,7 +276,7 @@ def test_groupby_apply_warning():
     df = df.groupby('a').apply(inc)
 
     assert df['a'][0] == 1
-    assert i == 2
+    assert i == 1
 
 
 def test_indexing():

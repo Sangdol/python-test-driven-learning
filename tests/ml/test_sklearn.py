@@ -194,14 +194,11 @@ def test_datasets():
     assert type(iris).__module__ == 'sklearn.utils'
     assert type(iris).__name__ == 'Bunch'
 
-    assert_array_equal(list(iris), ['data', 'target', 'target_names', 'DESCR', 'feature_names', 'filename'])
     assert iris.data.shape == (150, 4)
     assert type(iris.data).__name__ == 'ndarray'
     assert iris.target.shape == (150,)
     assert type(iris.target).__name__ == 'ndarray'
     assert_array_equal(np.unique(iris.target), [0, 1, 2])
-
-    assert iris.filename.find('sklearn/datasets/data/iris.csv') > -1  # file location
 
     assert_array_equal(iris.feature_names,
                        ['sepal length (cm)', 'sepal width (cm)',

@@ -34,9 +34,3 @@ def test_time_delta():
     assert ts.day == 17
     assert ts.hour == 3
 
-
-def test_date_range():
-    dates = pd.date_range('9/1/2018', periods=3, freq='D')
-    assert_array_equal(dates.astype(str), ['2018-09-01', '2018-09-02', '2018-09-03'])
-    assert_array_equal(dates.weekday_name, ['Saturday', 'Sunday', 'Monday'])
-
