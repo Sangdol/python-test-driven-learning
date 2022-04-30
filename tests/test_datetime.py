@@ -5,10 +5,9 @@ import datetime as dt
 import time as tm
 
 
-def test_epoch_to_datetime():
-    epoch = 1651002158
-    datetime = dt.datetime.fromtimestamp(epoch, dt.timezone.utc)
-    print(datetime.isoformat())
+def test_timestamp_to_datetime():
+    timestamp = 1651002158
+    datetime = dt.datetime.fromtimestamp(timestamp, dt.timezone.utc)
     assert datetime.isoformat() == '2022-04-26T19:42:38+00:00'
 
 
