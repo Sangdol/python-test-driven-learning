@@ -35,3 +35,22 @@ def test_basic():
     # but it doesn't change the task itself.
     assert task['status'] == 1
 
+
+def test_qsize():
+    q = SQLQueue(':memory:')
+
+    assert q.put('a') == 1
+    assert q.put('b') == 2
+
+    assert q.qsize() == 2
+
+    task = q.pop()
+
+    # still 2
+    assert q.qsize() == 2
+
+    # changes the count after done
+    q.done(task['message_id'])
+    assert q.qsize() == 1
+
+
