@@ -36,6 +36,14 @@ def test_basic():
     assert task['status'] == 1
 
 
+def test_datatype():
+    q = SQLQueue(':memory:')
+
+    q.put(1)
+
+    assert q.pop()['message'] == '1'
+
+
 def test_qsize():
     q = SQLQueue(':memory:')
 
