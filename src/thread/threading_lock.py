@@ -34,6 +34,20 @@ def lock_count(thread_id):
     print(f'{thread_id} After: {counter}')
 
 
+def with_lock_count(thread_id):
+    global counter
+
+    # It's not possible to add a timeout using a with statement.
+    # https://stackoverflow.com/questions/16740104/python-lock-with-statement-and-timeout
+    with lock:
+        print(f'{thread_id} Before: {counter}')
+
+        counter += 1
+        time.sleep(0.1)
+
+        print(f'{thread_id} After: {counter}')
+
+
 def lock_count_timeout(thread_id):
     global counter
 
@@ -84,8 +98,10 @@ def main(test_number):
     elif test_number == 2:
         spawn(lock_count)
     elif test_number == 3:
-        spawn(lock_count_timeout)
+        spawn(with_lock_count)
     elif test_number == 4:
+        spawn(lock_count_timeout)
+    elif test_number == 5:
         spawn(locked_count)
     else:
         raise ValueError('Invalid test number.')
