@@ -30,8 +30,8 @@ def lock_count(thread_id):
     counter += 1
     time.sleep(0.1)
 
-    print(f'{thread_id} After: {counter}')
     lock.release()
+    print(f'{thread_id} After: {counter}')
 
 
 def lock_count_timeout(thread_id):
@@ -45,11 +45,27 @@ def lock_count_timeout(thread_id):
         counter += 1
         time.sleep(0.1)
 
-        print(f'{thread_id} After: {counter}')
         lock.release()
+        print(f'{thread_id} After: {counter}')
     except RuntimeError as e:
         # release unlocked lock
         print(f'{thread_id} {e}')
+
+
+def locked_count(thread_id):
+    global counter
+
+    if lock.locked():
+        print(f'{thread_id} Already locked')
+    else:
+        lock.acquire()
+        print(f'{thread_id} Before: {counter}')
+
+        counter += 1
+        time.sleep(0.1)
+
+        lock.release()
+        print(f'{thread_id} After: {counter}')
 
 
 def spawn(func):
@@ -69,6 +85,8 @@ def main(test_number):
         spawn(lock_count)
     elif test_number == 3:
         spawn(lock_count_timeout)
+    elif test_number == 4:
+        spawn(locked_count)
     else:
         raise ValueError('Invalid test number.')
 
