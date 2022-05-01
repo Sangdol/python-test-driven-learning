@@ -2,7 +2,7 @@
 Some code is from the book Robust Python.
 """
 from dataclasses import dataclass
-from typing import TypeVar, List, Optional, Union, Literal, Set, Tuple, Final
+from typing import TypeVar, List, Optional, Union, Literal, Set, Tuple, Final, TypedDict
 
 
 def test_method():
@@ -83,3 +83,11 @@ def test_final():
     NAME: Final = 'Sang'
 
     assert NAME == 'Sang'
+
+
+def test_typed_dict():
+    class Person(TypedDict):
+        name: str
+        age: int
+
+    assert Person(name='Sang', age=30) == {'name': 'Sang', 'age': 30}
