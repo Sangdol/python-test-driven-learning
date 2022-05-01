@@ -3,6 +3,7 @@ Some code is from the book Robust Python.
 """
 from dataclasses import dataclass
 from typing import TypeVar, List, Optional, Union, Literal, Set, Tuple, Final, TypedDict
+from decimal import Decimal
 
 
 def test_method():
@@ -91,3 +92,13 @@ def test_typed_dict():
         age: int
 
     assert Person(name='Sang', age=30) == {'name': 'Sang', 'age': 30}
+
+
+def test_decimal_sum():
+    def return_decimal() -> Decimal:
+        # Need to wrap with Decimal again
+        # since sum() returns Decimal | Literal[0]
+        return Decimal(sum([Decimal(1), Decimal(2)]))
+
+    assert return_decimal() == Decimal(3)
+
