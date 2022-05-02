@@ -14,6 +14,11 @@ def test_global_variable():
     assert import_test.global_variable == 2
 
 
+def test_global_variable_2():
+    # The global variable is back to 1 after the previous test.
+    assert import_test.global_variable == 1
+
+
 def test_import():
     assert test_add.add(1, 2) == 3
 
