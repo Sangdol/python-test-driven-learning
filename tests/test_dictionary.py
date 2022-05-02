@@ -161,3 +161,21 @@ def test_contains_other_dict():
 
     assert d1.items() <= d2.items()
     assert all(item in d2.items() for item in d1.items())
+
+
+def test_merging_dicts():
+    """
+    https://stackoverflow.com/questions/38987/how-can-i-merge-two-python-dictionaries-in-a-single-expression
+    """
+    d1 = {'a': 1, 'b': 2}
+    d2 = {'c': 3, 'd': 4}
+
+    d3 = {**d1, **d2}
+    assert d3 == {'a': 1, 'b': 2, 'c': 3, 'd': 4}
+
+    d4 = {**d1, **d2, 'e': 5}
+    assert d4 == {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
+
+    d_to_update = {'a': 1, 'b': 2}
+    d_to_update.update(d2)
+    assert d_to_update == {'a': 1, 'b': 2, 'c': 3, 'd': 4}
