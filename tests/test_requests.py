@@ -29,4 +29,5 @@ def test_requests_with_headers():
     assert response.url == 'https://httpbin.org/get'
     assert response.json()['headers'].items() >= headers.items()
     assert response.json()['headers']['Host'] == 'httpbin.org'
+    assert type(response.json()) == dict
 
