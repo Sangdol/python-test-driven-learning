@@ -1,5 +1,5 @@
-global_variable = 1
+_global_variable = 1
 
 
 def hello():
-    return 'hello'
+    return "hello"

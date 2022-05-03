@@ -258,9 +258,11 @@ def test_groupby_apply():
 # https://github.com/pandas-dev/pandas/issues/7739
 # http://pandas.pydata.org/pandas-docs/stable/groupby.html#flexible-apply
 #
+# => it seems it's fixed
+#
 def test_groupby_apply_warning():
-    df = pd.DataFrame({'a': [0]})
 
+    df = pd.DataFrame({'a': [0]})
     i = 0
 
     # a function with a side-effect
