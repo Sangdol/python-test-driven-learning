@@ -6,9 +6,6 @@ pytest doctest: https://docs.pytest.org/en/latest/doctest.html
 3
 """
 
-import numpy as np
-
-
 def arange():
     """
     >>> a = np.arange(10)
