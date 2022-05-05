@@ -3,10 +3,8 @@ https://pydantic-docs.helpmanual.io/
 """
 from datetime import datetime
 from typing import List, Optional
-from decimal import Decimal
 
 from pydantic import BaseModel, validator
-from pydantic.dataclasses import dataclass
 
 
 def test_basic():

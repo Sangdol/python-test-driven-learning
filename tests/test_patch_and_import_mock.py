@@ -1,6 +1,5 @@
-import sys
+import pytest
 
-from unittest.mock import Mock
 from unittest.mock import patch
 
 import stub.package_test_math as test_math
@@ -45,7 +44,7 @@ def test_multiple_patch_decorator(mock_print, mock_abs):
 def test_patch():
     class Clazz:
         def method(self, number):
-            pass
+            return number + 1
 
     # Why do we need 'with'? to patch only in the scope
     # https://docs.python.org/3/library/unittest.mock.html#the-patchers
