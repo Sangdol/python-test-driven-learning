@@ -38,3 +38,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 addopts = "-vv -s --disable-warnings"
+
+[tool.black]
+skip-string-normalization = true
