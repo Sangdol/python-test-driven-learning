@@ -28,6 +28,10 @@ def test_comparison():
     # Rounding doesn't help
     assert round(Decimal("0.30"), 2) > 0.3
 
+    # Rounding helps in some cases
+    assert Decimal(0.3) - Decimal("0.3") != 0
+    assert round(Decimal(0.3) - Decimal("0.3"), 2) == 0
+
     # 0 always works
     assert Decimal("0.0") == 0
     assert Decimal("0.0") == Decimal(0)
