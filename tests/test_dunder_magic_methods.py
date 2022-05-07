@@ -1,4 +1,6 @@
 """Dunder/Magic Methods tests
+
+https://docs.python.org/3/reference/datamodel.html#customization
 """
 
 
