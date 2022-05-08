@@ -73,3 +73,18 @@ def test_magic_mock():
 
     assert empty.abc("hi") == "abc"
     empty.abc.assert_called_with("hi")
+
+
+def test_mock_methods():
+    mock = Mock()
+
+    def abc(a):
+        return a
+
+    mock.abc = abc
+
+    assert mock.abc(1) == 1
+
+    with pytest.raises(AttributeError):
+        # No assert_called_with in abc()
+        mock.abc.assert_called_with(1)
