@@ -27,7 +27,7 @@ def test_mock_side_effect():
     assert mock("hallo") == "hallo"
 
 
-def test_mock_methods():
+def test_mock_method_return_value():
     mock = Mock()
     mock.test.return_value = "hello"
     assert mock.test() == "hello"
@@ -69,10 +69,10 @@ def test_magic_mock():
         pass
 
     empty = Empty()
-    empty.abc = MagicMock(return_value="abc")
+    empty.abc = MagicMock(return_value="abc")  # type: ignore
 
-    assert empty.abc("hi") == "abc"
-    empty.abc.assert_called_with("hi")
+    assert empty.abc("hi") == "abc"  # type: ignore
+    empty.abc.assert_called_with("hi")  # type: ignore
 
 
 def test_mock_methods():
