@@ -2,7 +2,18 @@
 Some code is from the book Robust Python.
 """
 from dataclasses import dataclass
-from typing import TypeVar, List, Optional, Union, Literal, Set, Tuple, Final, TypedDict
+from typing import (
+    TypeVar,
+    List,
+    Optional,
+    Union,
+    Literal,
+    Set,
+    Tuple,
+    Final,
+    TypedDict,
+    Callable,
+)
 from decimal import Decimal
 from collections.abc import KeysView
 
@@ -109,3 +120,13 @@ def test_keys_view():
         return d.keys()
 
     assert list(keys_view()) == [1, 2]
+
+
+def test_callable():
+    def nested(a: int) -> Callable[[int, int], int]:
+        def inside(b: int, c: int) -> int:
+            return a + b + c
+
+        return inside
+
+    assert nested(1)(2, 3) == 6
