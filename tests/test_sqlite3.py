@@ -1,7 +1,6 @@
 """
 https://docs.python.org/3/library/sqlite3.html
 """
-import pytest
 import sqlite3
 
 
@@ -26,7 +25,9 @@ def test_sqlite3_cursor():
 def test_sqlite3_integration():
     conn = sqlite3.connect(':memory:')
     cursor = conn.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY, name TEXT)')
+    cursor.execute(
+        'CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY, name TEXT)'
+    )
     cursor.execute('INSERT INTO test (name) VALUES (?)', ('test',))
     cursor.execute('SELECT * FROM test')
     result = cursor.fetchall()
