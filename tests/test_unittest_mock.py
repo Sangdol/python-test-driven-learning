@@ -2,7 +2,7 @@
 https://docs.python.org/3/library/unittest.mock.html#module-unittest.mock
 """
 from unittest.mock import MagicMock
-from unittest.mock import Mock, call
+from unittest.mock import Mock, call, patch, create_autospec
 
 import pytest
 
@@ -88,3 +88,58 @@ def test_mock_methods():
     with pytest.raises(AttributeError):
         # No assert_called_with in abc()
         mock.abc.assert_called_with(1)
+
+
+class MyClass:
+    attr = 10
+
+    def __init__(self):
+        self.init_attribute = 1
+
+    def abc(self):
+        return 'abc'
+
+
+def test_spec_autospec():
+    #
+    # Rationale: mock can ignore typos and changes of APIs of the code under test.
+    #
+    mock = Mock(name='A', return_value=None)
+    mock.assetrrr_with_typo(1)  # This doesn't break the test.
+
+    with pytest.raises(AttributeError):
+        # The typo starts with `assert_` throws an error though.
+        mock.assert_with_typo(1)
+
+    #
+    # spec
+    #
+    mock = Mock(spec=MyClass)
+
+    # Fixes the issue of ignoring typos
+    with pytest.raises(AttributeError):
+        mock.assetr_with_typo()
+
+    # But the issue still remains for the methods
+    mock.abc.assetrrr_with_typo()
+
+    #
+    # autospec
+    #
+    print('global', globals())
+    patcher = patch('tests.test_unittest_mock.MyClass', autospec=True)
+    mock = patcher.start()
+    with pytest.raises(AttributeError):
+        mock.abc.assetrrr_with_typo()
+
+    # But autospec doesn't know about the attributes
+    # that are created in __init__()
+    with pytest.raises(AttributeError):
+        mock.init_attribute
+
+
+def test_create_autospec():
+    # This is a simpler version of patcher(..., autospec=True)
+    mock = create_autospec(MyClass)
+    with pytest.raises(AttributeError):
+        mock.abc.assetrrr_with_typo()
