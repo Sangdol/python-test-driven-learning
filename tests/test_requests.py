@@ -31,3 +31,23 @@ def test_requests_with_headers():
     assert response.json()['headers']['Host'] == 'httpbin.org'
     assert type(response.json()) == dict
 
+
+def test_requests_data_vs_json():
+    """
+    data: application/x-www-form-urlencoded
+    json: application/json
+    """
+    url = 'https://httpbin.org/post'
+
+    data_response = requests.post(url, data={'a': 1})
+
+    assert data_response.status_code == 200
+    assert data_response.json()['data'] == ''
+    assert data_response.json()['json'] is None
+    assert data_response.json()['form'] == {'a': '1'}
+
+    json_response = requests.post(url, json={'a': 1})
+
+    assert json_response.json()['data'] == '{"a": 1}'
+    assert json_response.json()['json'] == {'a': 1}
+    assert json_response.json()['form'] == {}
