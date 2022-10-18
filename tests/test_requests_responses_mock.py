@@ -86,3 +86,17 @@ def test_responses_matchers_header():
         ).content
         == b'{"a": 2}'
     )
+
+
+@responses.activate
+def test_responses_json_params_matcher():
+    url = 'https://test.com/'
+
+    responses.post(
+        url=url,
+        match=[matchers.json_params_matcher({"abc": 1})],
+        status=200,
+    )
+
+    assert s.post(url, json={"abc": 1}).ok
+    assert s.request("POST", url, json={"abc": 1}).ok
