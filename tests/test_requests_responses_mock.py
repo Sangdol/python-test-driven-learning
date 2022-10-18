@@ -1,6 +1,7 @@
 """
 https://github.com/getsentry/responses
 """
+import functools
 import responses
 import requests
 import re
@@ -8,12 +9,17 @@ import re
 from responses import matchers
 
 
+# A way to set timeout globally: https://stackoverflow.com/a/59317604/524588
+s = requests.Session()
+s.request = functools.partial(s.request, timeout=0.1)
+
+
 @responses.activate
 def test_responses():
     url = 'https://test.com'
     responses.add(responses.POST, url, json={'a': 1}, status=200)
 
-    assert requests.post(url).content == b'{"a": 1}'
+    assert s.post(url).content == b'{"a": 1}'
 
 
 @responses.activate
@@ -23,10 +29,10 @@ def test_multiple_responses():
     responses.add(responses.POST, url, json={'a': 1}, status=200)
     responses.add(responses.POST, url, json={'a': 2}, status=200)
 
-    assert requests.post(url).content == b'{"a": 1}'
-    assert requests.post(url).content == b'{"a": 1}'
-    assert requests.post(url).content == b'{"a": 2}'
-    assert requests.post(url).content == b'{"a": 2}'
+    assert s.post(url).content == b'{"a": 1}'
+    assert s.post(url).content == b'{"a": 1}'
+    assert s.post(url).content == b'{"a": 2}'
+    assert s.post(url).content == b'{"a": 2}'
 
 
 @responses.activate
@@ -35,7 +41,7 @@ def test_responses_url_pattern():
     responses.add(responses.POST, url, json={'a': 1}, status=200)
 
     assert (
-        requests.post(
+        s.post(
             'https://test.com/abc?a=1&b=2',
             headers={'Content-Type': 'application/json; charset=UTF-8'},
         ).content
@@ -66,7 +72,7 @@ def test_responses_matchers_header():
     )
 
     assert (
-        requests.post(
+        s.post(
             'https://test.com/',
             headers=headers1,
         ).content
@@ -74,7 +80,7 @@ def test_responses_matchers_header():
     )
 
     assert (
-        requests.post(
+        s.post(
             'https://test.com/',
             headers=headers2,
         ).content
