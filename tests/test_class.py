@@ -1,6 +1,7 @@
 """
 https://docs.python.org/3/tutorial/classes.html
 """
+import pytest
 
 from dataclasses import dataclass
 
@@ -38,7 +39,7 @@ def test_class_attributes():
 
 # https://stackoverflow.com/questions/12179271/meaning-of-classmethod-and-staticmethod-for-beginner
 def test_staticmethod_and_classmethod():
-    class Person():
+    class Person:
         def __init__(self, age, name):
             self.age = age
             self.name = name
@@ -88,8 +89,13 @@ def test_dataclass():
     assert p.name == 'Sang'
     assert p.age == 36
     assert p.alive
-    assert p.__repr__() == "test_dataclass.<locals>.Person(name='Sang', age=36, alive=True)"
-    assert p.__str__() == "test_dataclass.<locals>.Person(name='Sang', age=36, alive=True)"
+    assert (
+        p.__repr__()
+        == "test_dataclass.<locals>.Person(name='Sang', age=36, alive=True)"
+    )
+    assert (
+        p.__str__() == "test_dataclass.<locals>.Person(name='Sang', age=36, alive=True)"
+    )
     assert p.hello() == 'Hello Sang'
 
 
@@ -177,6 +183,7 @@ def test_constructor_init():
 def test_simple_class():
     class MyClass:
         """A simple class"""
+
         i = 123
 
         def f(self):
@@ -186,3 +193,24 @@ def test_simple_class():
     assert c.i == 123
     assert c.__doc__ == 'A simple class'
     assert c.f() == 'hello class'
+
+
+def test_init_subclass():
+    """
+    https://docs.python.org/3/reference/datamodel.html#object.__init_subclass__
+    """
+
+    class Animal:
+        left_finger_count = None
+        right_finger_count = None
+
+        def __init_subclass__(cls):
+            if cls.left_finger_count != cls.right_finger_count:
+                raise ValueError()
+
+    # We can throw an exception when a subclass is defined using __init_subclass__.
+    with pytest.raises(ValueError):
+
+        class Dog(Animal):
+            left_finger_count = 1
+            right_finger_count = 2
