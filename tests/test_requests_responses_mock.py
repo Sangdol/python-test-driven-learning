@@ -100,3 +100,13 @@ def test_responses_json_params_matcher():
 
     assert s.post(url, json={"abc": 1}).ok
     assert s.request("POST", url, json={"abc": 1}).ok
+
+
+@responses.activate
+def test_responses_call_count():
+    url = 'https://test.com/'
+
+    rsp = responses.get(url=url, status=200)
+
+    assert s.get(url).ok
+    assert rsp.call_count == 1
