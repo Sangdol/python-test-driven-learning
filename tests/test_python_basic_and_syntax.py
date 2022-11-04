@@ -25,8 +25,8 @@ def test_if_equal_vs_is():
 
     # https://stackoverflow.com/questions/15171695/whats-with-the-integer-cache-inside-python
     b = 1000
-    assert a is 10 ** 0
-    assert b is not 10 ** 3
+    assert a is 10**0
+    assert b is not 10**3
 
 
 def test_if_statement():
@@ -175,3 +175,12 @@ def test_yield():
 
     gen2 = generator_yield()
     assert sum(gen2) == 10
+
+
+def test_walrus_operator():
+    """
+    https://docs.python.org/3/whatsnew/3.8.html#assignment-expressions
+    """
+    a = [1, 2, 3]
+    if (n := len(a)) > 2:
+        assert n == 3, 'Avoiding calling len() twice'
