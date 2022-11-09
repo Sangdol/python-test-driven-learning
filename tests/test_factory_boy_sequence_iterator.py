@@ -29,7 +29,7 @@ def test_user_factory():
     assert user1.age == 20
 
 
-def test_user_factory_undeterministic():
+def test_user_factory_nondeterministic():
     """
     This test only succeeds if the first test is run first
     due to the sequence iterator being shared between tests.
