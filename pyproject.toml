@@ -24,6 +24,7 @@ Flask = "^2.1.1"
 litequeue = "^0.5"
 pytest-flake8 = "^1.1.1"
 pydantic = "^1.9.0"
+factory-boy = "^3.2.1"
 
 [tool.poetry.dev-dependencies]
 ptpython = "*"
