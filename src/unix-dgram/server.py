@@ -1,7 +1,7 @@
 import os
 import socket
 
-server_address = './uds_socket'
+server_address = '/tmp/uds_socket'
 
 # Make sure the socket does not already exist
 try:

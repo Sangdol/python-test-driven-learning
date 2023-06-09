@@ -3,7 +3,7 @@ import socket
 # Create a UDS socket
 sock = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
 
-server_address = './uds_socket'
+server_address = '/tmp/uds_socket'
 message = b'This is the message. It will be echoed.'
 
 try:
